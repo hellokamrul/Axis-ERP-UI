@@ -1,0 +1,62 @@
+﻿@model HaloAxis_UI.Models.CompanyCreateViewModel
+@{
+    ViewData["Title"] = "Create company";
+}
+<div class="container py-5" style="max-width: 760px">
+    <h3 class="mb-3">Create your company</h3>
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label class="form-label">Company name *</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Country</label>
+                <input asp-for="CountryId" class="form-control" placeholder="US / BD / ..." />
+            </div>
+            <div class="col-md-8">
+                <label class="form-label">Address</label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">City</label>
+                <input asp-for="City" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">State</label>
+                <input asp-for="State" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Postal code</label>
+                <input asp-for="ZipOrPostalCode" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Currency</label>
+                <input asp-for="Currency" class="form-control" placeholder="USD, BDT..." />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Contact person</label>
+                <input asp-for="ContactPerson" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Phone</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Create company</button>
+            <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-secondary">Sign out</a>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,390 @@
+﻿@{
+    Layout = null;
+    var title = ViewData["Title"] as string ?? "HaloAxis";
+    var ctrl = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "");
+    bool isHK = new[] { "Department", "Designation", "Shift", "Section" }.Contains(ctrl);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- minimal helpers so module switching works even if site.css is empty -->
+    <style>
+        .app-grid {
+            display: grid;
+            grid-template-columns: 70px 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .icon-rail {
+            background: #0b1320;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: .75rem .4rem;
+        }
+
+        .brand {
+            display: block;
+            margin: 6px 0 16px;
+        }
+
+        .logo-dot {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            background: #39bdf8;
+            box-shadow: 0 0 0 6px rgba(57,189,248,.15);
+        }
+
+        .rail-nav {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .rail-btn {
+            color: #cbd5e1;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            text-decoration: none;
+        }
+
+            .rail-btn:hover, .rail-btn.active {
+                background: rgba(255,255,255,.08);
+            }
+
+        .rail-sep {
+            height: 1px;
+            width: 36px;
+            background: rgba(255,255,255,.15);
+            margin: .5rem 0;
+        }
+
+        .rail-footer {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            align-items: center;
+        }
+
+        .rail-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e293b;
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .avatar-fallback {
+            font-weight: 700
+        }
+
+        .side-nav {
+            border-right: 1px solid #e7ecf3;
+            background: #fff;
+        }
+
+        .side-top {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e7ecf3;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 600
+        }
+
+        .side-title-wrap {
+            padding: 12px 16px 4px;
+        }
+
+        .side-title {
+            font-weight: 700;
+            color: #0f172a
+        }
+
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 6px 8px;
+        }
+
+        .menu-section {
+            font-size: .8rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: #6b7280;
+            padding: 8px 8px 2px;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: #0f172a;
+            text-decoration: none;
+        }
+
+            .menu-link:hover {
+                background: #f3f6fb;
+            }
+
+            .menu-link.active {
+                background: #1860ff;
+                color: #fff;
+            }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e7ecf3;
+            background: #fff
+        }
+
+        .search-wrap {
+            position: relative;
+            width: min(460px, 60%);
+        }
+
+            .search-wrap i {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                color: #9aa3af
+            }
+
+        .search-input {
+            padding-left: 32px;
+        }
+
+        .page {
+            padding: 18px;
+            background: #f7f9fc;
+            min-height: calc(100vh - 120px);
+        }
+
+        .footer {
+            padding: 12px 18px;
+            border-top: 1px solid #e7ecf3;
+            background: #fff
+        }
+
+        /* module switcher */
+        .side-nav .module {
+            display: none;
+        }
+
+            .side-nav .module.active {
+                display: block;
+            }
+
+        /* responsive: collapse sidebar */
+        @@media (max-width: 992px) {
+            .app-grid
+
+        {
+            grid-template-columns: 70px 0 1fr;
+        }
+
+        body.side-open .app-grid {
+            grid-template-columns: 70px 280px 1fr;
+        }
+
+        .side-nav {
+            position: sticky;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            overflow: auto;
+            background: #fff;
+        }
+
+        }
+
+        body.side-collapsed .app-grid {
+            grid-template-columns: 70px 0 1fr;
+        }
+    </style>
+
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <div class="app-grid">
+        <!-- LEFT RAIL -->
+        <aside class="icon-rail">
+            <a class="brand" asp-controller="Home" asp-action="Index"><span class="logo-dot"></span></a>
+
+            <nav class="rail-nav">
+                <a class="rail-btn" href="#" title="Notifications"><i class="bi bi-bell"></i></a>
+                <a class="rail-btn" href="#" title="Search"><i class="bi bi-search"></i></a>
+
+                <div class="rail-sep"></div>
+
+                <!-- Collapse/expand toggle -->
+                <a class="rail-btn js-toggle-sidebar" href="#" title="Collapse/Expand">
+                    <i class="bi bi-layout-sidebar"></i>
+                </a>
+
+                <!-- Module openers -->
+                <a class="rail-btn js-open-module @(isHK ? "active" : null)" data-module="housekeeping" title="House Keeping">
+                    <i class="bi bi-house-gear"></i>
+                </a>
+                <a class="rail-btn js-open-module @(!isHK ? "active" : null)" data-module="holiday" title="Holiday &amp; Leave">
+                    <i class="bi bi-umbrella"></i>
+                </a>
+
+                <a class="rail-btn" href="#" title="Onboarding"><i class="bi bi-person-lines-fill"></i></a>
+                <a class="rail-btn" href="#" title="Teams"><i class="bi bi-diagram-3"></i></a>
+                <a class="rail-btn" href="#" title="Compliance"><i class="bi bi-shield"></i></a>
+                <a class="rail-btn" href="#" title="Reports"><i class="bi bi-graph-up"></i></a>
+            </nav>
+
+            <div class="rail-footer">
+                <a class="rail-btn" asp-controller="Settings" asp-action="Index" title="Settings"><i class="bi bi-gear"></i></a>
+                <a class="rail-avatar" asp-controller="Account" asp-action="Profile" title="Profile">
+                    <img src="~/images/avatar.jpg" alt="User" onerror="this.style.display='none'">
+                    <span class="avatar-fallback">U</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MODULE SIDEBAR -->
+        <aside class="side-nav">
+            <div class="side-top">
+                <a class="back-link js-toggle-sidebar" href="#" title="Collapse sidebar">
+                    <i class="bi bi-arrow-left"></i> HaloAxis
+                </a>
+            </div>
+
+            <!-- House Keeping module -->
+            <div class="module @(isHK ? "active" : "")" data-module="housekeeping">
+                <div class="side-title-wrap">
+                    <div class="side-title"><i class="bi bi-house-gear"></i> House Keeping</div>
+                </div>
+                <ul class="menu">
+                    <li><a class="menu-link @(ctrl=="Department"  ? "active" : null)" asp-controller="Department" asp-action="Index">Department</a></li>
+                    <li><a class="menu-link @(ctrl=="Designation" ? "active" : null)" asp-controller="Designation" asp-action="Index">Designation</a></li>
+                    <li><a class="menu-link @(ctrl=="Shift"       ? "active" : null)" asp-controller="Shift" asp-action="Index">Shift</a></li>
+                    <li><a class="menu-link @(ctrl=="Section"     ? "active" : null)" asp-controller="Section" asp-action="Index">Section</a></li>
+                </ul>
+            </div>
+
+            <!-- Holiday & Leave module -->
+            <div class="module @(!isHK ? "active" : "")" data-module="holiday">
+                <div class="side-title-wrap">
+                    <div class="side-title"><i class="bi bi-umbrella"></i> Holiday &amp; Leave</div>
+                </div>
+                <ul class="menu">
+                    <li><a class="menu-link @(ctrl=="Holiday"       ? "active" : null)" asp-controller="Holiday" asp-action="Index">Holiday Management</a></li>
+                    <li><a class="menu-link @(ctrl=="LeaveType"     ? "active" : null)" asp-controller="LeaveType" asp-action="Index">Leave Type</a></li>
+                    <li><a class="menu-link @(ctrl=="LeaveBalance"  ? "active" : null)" asp-controller="LeaveBalance" asp-action="Index">Leave Balance</a></li>
+                    <li class="menu-section">Leave Management</li>
+                    <li><a class="menu-link @(ctrl=="LeaveRequest"  ? "active" : null)" asp-controller="LeaveRequest" asp-action="Index">Leave Request</a></li>
+                    <li><a class="menu-link @(ctrl=="LeaveApproval" ? "active" : null)" asp-controller="LeaveApproval" asp-action="Index">Leave Approval</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main">
+            <header class="topbar">
+                <button class="btn btn-light d-lg-none me-2" id="openSidebar"><i class="bi bi-list"></i></button>
+
+                <div class="search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input class="form-control form-control-sm search-input" placeholder="Search" />
+                </div>
+
+                <div class="top-actions">
+                    <button class="btn btn-light btn-icon"><i class="bi bi-bell"></i></button>
+                    <a class="btn btn-primary">Create New</a>
+                </div>
+            </header>
+
+            <main class="page">
+                @RenderBody()
+            </main>
+
+            <footer class="footer">
+                <span>&copy; @DateTime.Now.Year HaloAxis</span>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ---------------- Sidebar collapse / expand ----------------
+        const BODY = document.body;
+        const KEY_SIDEBAR = 'haloaxis.sidebar.collapsed';
+        const KEY_MODULE  = 'haloaxis.activeModule';
+
+        try { if (localStorage.getItem(KEY_SIDEBAR) === '1') BODY.classList.add('side-collapsed'); } catch (e) {}
+
+        const toggleSidebar = (e) => {
+            e?.preventDefault();
+            BODY.classList.toggle('side-collapsed');
+            try { localStorage.setItem(KEY_SIDEBAR, BODY.classList.contains('side-collapsed') ? '1' : '0'); } catch (e) {}
+        };
+
+        document.querySelectorAll('.js-toggle-sidebar').forEach(el => el.addEventListener('click', toggleSidebar));
+
+        // ---------------- Module switcher ----------------
+        const showModule = (name) => {
+            document.querySelectorAll('.side-nav .module').forEach(m => m.classList.toggle('active', m.dataset.module === name));
+            document.querySelectorAll('.rail-nav .js-open-module').forEach(btn => btn.classList.toggle('active', btn.dataset.module === name));
+            BODY.classList.remove('side-collapsed'); // ensure visible on desktop
+            BODY.classList.add('side-open');         // slide-in on mobile
+            try { localStorage.setItem(KEY_MODULE, name); } catch (e) {}
+        };
+
+        document.querySelectorAll('.js-open-module').forEach(btn => {
+            btn.addEventListener('click', (e) => { e.preventDefault(); showModule(btn.dataset.module); });
+        });
+
+        // Mobile slide-in helpers
+        document.getElementById('openSidebar')?.addEventListener('click', () => BODY.classList.toggle('side-open'));
+        document.querySelector('.main')?.addEventListener('click', () => BODY.classList.remove('side-open'));
+
+        // Init: server-derived active block or remembered choice
+        (function initModule(){
+            const serverDefault = document.querySelector('.side-nav .module.active')?.dataset.module;
+            let saved = null; try { saved = localStorage.getItem(KEY_MODULE); } catch(e){}
+            const initial = saved || serverDefault || 'housekeeping';
+            showModule(initial);
+        })();
+
+        // tooltips for rail icons
+        if (window.bootstrap) {
+            document.querySelectorAll('.rail-btn[title]').forEach(el => new bootstrap.Tooltip(el));
+        }
+    </script>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

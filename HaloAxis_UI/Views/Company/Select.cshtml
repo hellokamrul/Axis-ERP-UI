@@ -1,0 +1,33 @@
+﻿@model HaloAxis_UI.Models.CompanySelectionViewModel
+@{
+    ViewData["Title"] = "Select a company";
+}
+
+<div class="container py-5">
+    <h3 class="mb-3">Choose a company</h3>
+
+    <form asp-action="Select" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="list-group mb-3">
+            @for (int i = 0; i < Model.Companies.Count; i++)
+            {
+                var c = Model.Companies[i];
+                <label class="list-group-item d-flex align-items-center">
+                    <!-- Name should match the property for model binding -->
+                    <input class="form-check-input me-2"
+                           type="radio"
+                           name="CompanyId"
+                           value="@c.CompanyId"
+                    @(Model.CompanyId == c.CompanyId || (i == 0 && string.IsNullOrEmpty(Model.CompanyId)) ? "checked" : null) />
+                    <span class="fw-semibold">@c.CompanyName</span>
+                    <span class="text-muted ms-2">(@c.CompanyId)</span>
+                </label>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Continue</button>
+        <a asp-action="Create" class="btn btn-link">Create a new company</a>
+    </form>
+</div>

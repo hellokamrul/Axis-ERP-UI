@@ -1,0 +1,220 @@
+﻿@{
+    Layout = null;
+    var title = ViewData["Title"] as string ?? "Halo Axis — Unified ERP";
+    IgnoreBody(); // <-- tell Razor this layout doesn't render @RenderBody()
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <style>
+        :root {
+            --ink: #0b1320;
+            --text: #0f172a;
+            --muted: #6b7280;
+            --line: #e7ecf3;
+            --primary: #1860ff;
+            --bg: #f7f9fc;
+        }
+
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial
+        }
+
+        .nav-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: #fff;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .brand-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: #39bdf8;
+            display: inline-block;
+            box-shadow: 0 0 0 6px rgba(57,189,248,.15);
+            margin-right: 10px
+        }
+
+        .hero {
+            background: radial-gradient(1200px 600px at 70% -10%, rgba(24,96,255,.12), transparent 60%), linear-gradient(180deg,#ffffff, #f7f9fc 60%);
+            padding: 80px 0 40px;
+        }
+
+            .hero h1 {
+                font-size: clamp(2rem, 3.8vw, 3.25rem);
+                font-weight: 800;
+                letter-spacing: .2px
+            }
+
+            .hero p.lead {
+                color: var(--muted);
+                font-size: clamp(1.05rem, 1.4vw, 1.25rem)
+            }
+
+        .kpis {
+            gap: 24px
+        }
+
+        .kpi {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px 20px;
+            text-align: center
+        }
+
+        .services .card {
+            border: 1px solid var(--line);
+            border-radius: 18px
+        }
+
+        .services .bi {
+            font-size: 22px
+        }
+
+        .cta {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 18px 0;
+            background: #fff;
+            color: #5b6070
+        }
+    </style>
+    @RenderSection("Styles", false)
+</head>
+<body>
+
+    <!-- Top Nav -->
+    <div class="nav-wrap">
+        <nav class="container d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center fw-bold">
+                <span class="brand-dot"></span><span>Halo Axis</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Login">Sign in</a>
+                <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Sign up</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-7">
+                    <h1>One ERP to run your people, money, and projects.</h1>
+                    <p class="lead mt-3">
+                        Halo Axis unifies HR & Payroll, Leave, Accounting, Manpower & Budgeting,
+                        Performance and Project Management—so your team moves faster with total visibility.
+                    </p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Register">Get started — free</a>
+                        <a class="btn btn-outline-primary btn-lg" asp-controller="Account" asp-action="Login">Sign in</a>
+                    </div>
+                    <div class="d-flex kpis flex-wrap mt-4">
+                        <div class="kpi"><div class="h3 mb-0">+40%</div><small class="text-muted">Faster payroll runs</small></div>
+                        <div class="kpi"><div class="h3 mb-0">99.9%</div><small class="text-muted">Uptime SLA</small></div>
+                        <div class="kpi"><div class="h3 mb-0">5 min</div><small class="text-muted">Avg. setup time</small></div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="cta">
+                        <h5 class="mb-2">Try Halo Axis</h5>
+                        <p class="text-muted mb-3">Create your workspace in minutes—no credit card.</p>
+                        <a class="btn btn-primary w-100 mb-2" asp-controller="Account" asp-action="Register">Create account</a>
+                        <a class="btn btn-light w-100 border" asp-controller="Account" asp-action="Login">I have an account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services -->
+    <section class="py-5 services">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Everything you need in one ERP</h2>
+            <div class="row g-3 g-md-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-3 h-100">
+                        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-cash-coin"></i><h5 class="mb-0">HR & Payroll</h5></div>
+                        <p class="text-muted mb-0">Profiles, payroll runs, tax filings, benefits, and compliance—automated.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-3 h-100">
+                        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-umbrella"></i><h5 class="mb-0">Leave Management</h5></div>
+                        <p class="text-muted mb-0">Policies, balances, encashment and approvals tied to payroll.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-3 h-100">
+                        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-journal-check"></i><h5 class="mb-0">Accounting</h5></div>
+                        <p class="text-muted mb-0">General ledger, AP/AR, bank sync, and financial reports.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-3 h-100">
+                        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-people"></i><h5 class="mb-0">Manpower & Budgeting</h5></div>
+                        <p class="text-muted mb-0">Headcount planning, org charts, and cost forecasting.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-3 h-100">
+                        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-graph-up-arrow"></i><h5 class="mb-0">Performance</h5></div>
+                        <p class="text-muted mb-0">Goals, reviews, and OKRs connected to compensation.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-3 h-100">
+                        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-kanban"></i><h5 class="mb-0">Project Management</h5></div>
+                        <p class="text-muted mb-0">Tasks, sprints, time tracking, and cost-to-complete.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h3 class="fw-bold">Bring your HR, Finance, and Ops under one roof.</h3>
+            <p class="text-muted">Join teams that run payroll, close books, and ship projects in one place.</p>
+            <div class="d-flex gap-2 justify-content-center">
+                <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Register">Create free account</a>
+                <a class="btn btn-outline-primary btn-lg" asp-controller="Account" asp-action="Login">Sign in</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container d-flex justify-content-between small">
+            <span>&copy; @DateTime.Now.Year Halo Axis</span>
+            <span>Built for teams that move fast</span>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

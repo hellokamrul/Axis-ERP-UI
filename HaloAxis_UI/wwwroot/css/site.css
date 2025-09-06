@@ -1,0 +1,339 @@
+:root {
+    --rail-bg: #0b1320;
+    --rail-fg: #c7d2e4;
+    --rail-fg-strong: #fff;
+    --side-bg: #fff;
+    --page-bg: #f6f8fc;
+    --line: #e7ecf3;
+    --text: #0f172a;
+    --muted: #6b7280;
+    --primary: #1860ff;
+    --primary-ghost: #eaf2ff;
+}
+
+/* base */
+html, body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial
+}
+
+/* grid */
+.app-grid {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 64px 280px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "rail side main" "rail side main" "rail side main";
+    transition: grid-template-columns .18s ease;
+}
+
+/* ------- COLLAPSED STATE (desktop) ------- */
+body.side-collapsed .app-grid {
+    grid-template-columns: 64px 0 1fr;
+}
+
+body.side-collapsed .side-nav {
+    width: 0;
+    min-width: 0;
+    border-right: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* left rail */
+.icon-rail {
+    grid-area: rail;
+    background: var(--rail-bg);
+    color: var(--rail-fg);
+    width: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.brand {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 6px
+}
+
+.logo-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: #39bdf8;
+    display: block;
+    box-shadow: 0 0 0 4px rgba(57,189,248,.15)
+}
+
+.rail-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%
+}
+
+.rail-sep {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,.06);
+    margin: 6px 0 8px
+}
+
+.rail-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--rail-fg);
+    text-decoration: none;
+    margin: 4px 0;
+    transition: background .15s,color .15s;
+}
+
+    .rail-btn:hover {
+        background: rgba(255,255,255,.08);
+        color: var(--rail-fg-strong)
+    }
+
+    .rail-btn.active {
+        background: var(--primary);
+        color: #fff
+    }
+
+.rail-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0
+}
+
+.rail-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,.6)
+}
+
+    .rail-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block
+    }
+
+    .rail-avatar .avatar-fallback {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        background: #1f2937;
+        color: #c7d2e4;
+        font-weight: 700
+    }
+
+/* sidebar (module) */
+.side-nav {
+    grid-area: side;
+    background: var(--side-bg);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    transition: width .18s ease, padding .18s ease, border-color .18s ease;
+}
+
+.side-top {
+    padding: 16px 18px 6px;
+    border-bottom: 1px solid var(--line);
+    background: #fff
+}
+
+.back-link {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    color: #111827;
+    text-decoration: none;
+    font-weight: 700
+}
+
+.side-title-wrap {
+    padding: 12px 18px 8px;
+    background: #fff
+}
+
+.side-title {
+    font-weight: 800;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 10px 14px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.menu-section {
+    margin: 8px 6px 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--muted);
+    letter-spacing: .04em
+}
+
+.menu-link {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 18px;
+    color: #1f2937;
+    text-decoration: none
+}
+
+    .menu-link:hover {
+        background: #f3f6fb
+    }
+
+    .menu-link.active {
+        background: var(--primary-ghost);
+        color: var(--primary)
+    }
+
+/* main & topbar */
+.main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    min-width: 0
+}
+
+.topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px
+}
+
+.search-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f3f6fb;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 6px 10px;
+    max-width: 720px
+}
+
+    .search-wrap i {
+        opacity: .6
+    }
+
+.search-input {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    outline: none
+}
+
+.btn-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px
+}
+
+.top-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.page {
+    padding: 18px 18px 32px;
+    overflow: auto
+}
+
+.footer {
+    padding: 10px 16px;
+    border-top: 1px solid var(--line);
+    background: #fff
+}
+
+/* collapsible cards (optional) */
+.exp-card {
+    background: #f6f8fb;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 12px
+}
+
+.exp-head {
+    padding: 12px 14px;
+    background: #f6f8fb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.exp-body {
+    padding: 14px;
+    background: #fff;
+    border-top: 1px solid var(--line)
+}
+
+.exp-toggle i {
+    transition: transform .2s ease
+}
+
+.exp-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg)
+}
+
+/* responsive mobile: slide-in module sidebar */
+@media (max-width:1199.98px) {
+    .app-grid {
+        grid-template-columns: 64px 0 1fr
+    }
+
+    .side-nav {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -280px;
+        width: 280px;
+        z-index: 1040;
+        box-shadow: 0 20px 50px rgba(0,0,0,.08)
+    }
+
+    body.side-open .side-nav {
+        left: 64px
+    }
+}

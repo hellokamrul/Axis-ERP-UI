@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HaloAxis_UI.props" />
+</Project>

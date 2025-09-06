@@ -1,0 +1,22 @@
+﻿@model HaloAxis_UI.Models.DepartmentDto
+<div class="row g-3">
+    <div class="col-md-4">
+        <label class="form-label">Department Code</label>
+        <input asp-for="DeptCode" class="form-control" />
+        <span asp-validation-for="DeptCode" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">SL No</label>
+        <input asp-for="Slno" class="form-control" type="number" />
+        <span asp-validation-for="Slno" class="text-danger"></span>
+    </div>
+    <div class="col-md-8">
+        <label class="form-label">Department Name</label>
+        <input asp-for="DeptName" class="form-control" />
+        <span asp-validation-for="DeptName" class="text-danger"></span>
+    </div>
+    <div class="col-md-8">
+        <label class="form-label">Local Name</label>
+        <input asp-for="DeptLocalName" class="form-control" />
+    </div>
+</div>

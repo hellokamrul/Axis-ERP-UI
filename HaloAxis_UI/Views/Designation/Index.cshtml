@@ -1,0 +1,33 @@
+﻿@model HaloAxis_UI.Models.DesignationIndexViewModel
+@{
+    Layout = "_Layout"; ViewData["Title"] = "Designation";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Designation</h2>
+    <a asp-action="Create" class="btn btn-primary">Create Designation</a>
+</div>
+
+<table class="table align-middle">
+    <thead>
+    <tr>
+        <th>Designation Name</th>
+        <th>Department</th>
+        <th class="text-end"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var row in Model.Items)
+    {
+        <tr>
+            <td>@row.Name</td>
+            <td>@row.DeptName</td>   @* <- was DeptId *@
+            <td class="text-end">
+                <a asp-action="Edit" asp-route-id="@row.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a asp-action="Delete" asp-route-id="@row.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

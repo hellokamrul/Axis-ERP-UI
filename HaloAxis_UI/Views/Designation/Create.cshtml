@@ -1,0 +1,85 @@
+﻿@model HaloAxis_UI.Models.DesignationEditVm
+@{
+    Layout = "_Layout"; // or your layout path
+    ViewData["Title"] = "Create Designation";
+}
+
+<section class="container py-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Create Designation</h3>
+        <a class="btn btn-light" asp-action="Index"><i class="bi bi-chevron-left"></i> Back</a>
+    </div>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+        <input type="hidden" asp-for="ComId" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="DeptId" class="form-label">Department</label>
+                <select asp-for="DeptId" class="form-select"
+                        asp-items="Model.DepartmentOptions">
+                    <option value="">-- select --</option>
+                </select>
+                <span class="text-danger" asp-validation-for="DeptId"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="DesigName" class="form-label">Designation Name</label>
+                <input asp-for="DesigName" class="form-control" />
+                <span class="text-danger" asp-validation-for="DesigName"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="DesigLocalName" class="form-label">Local Name</label>
+                <input asp-for="DesigLocalName" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="SalaryRange" class="form-label">Salary Range</label>
+                <input asp-for="SalaryRange" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="Gsmin" class="form-label">Gsmin</label>
+                <input asp-for="Gsmin" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Attbonus" class="form-label">Attendance Bonus</label>
+                <input asp-for="Attbonus" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Holidaybonus" class="form-label">Holiday Bonus</label>
+                <input asp-for="Holidaybonus" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Nightallow" class="form-label">Night Allowance</label>
+                <input asp-for="Nightallow" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="Ttlmanpower" class="form-label">Total Manpower</label>
+                <input asp-for="Ttlmanpower" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Proposedmanpower" class="form-label">Proposed Manpower</label>
+                <input asp-for="Proposedmanpower" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Slno" class="form-label">SL No</label>
+                <input asp-for="Slno" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Save</button>
+            <a asp-action="Index" class="btn btn-light">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,705 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+@section Styles {
+    <style>
+        :root {
+            --line: #e7ecf3;
+            --muted: #6b7280;
+            --ink: #0b1320;
+            --primary: #1860ff;
+            --card: #ffffff;
+            --bg: #f6f8fc;
+            --pill: #eef4ff;
+        }
+
+        .dash {
+            padding: 18px
+        }
+
+        /* ===== existing header/kpis/cards ===== */
+        .dash-header {
+            background: linear-gradient(120deg, rgba(24,96,255,.10), rgba(129,140,248,.08));
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+            .dash-header .hello {
+                font-weight: 800;
+                font-size: 22px;
+                color: #0f172a
+            }
+
+            .dash-header .meta {
+                color: var(--muted);
+                font-size: 14px
+            }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .qa {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 8px 10px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #0f172a;
+            display: inline-flex;
+            gap: 6px;
+            align-items: center
+        }
+
+            .qa i {
+                font-size: 18px
+            }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .kpi {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+            .kpi .label {
+                color: var(--muted);
+                font-size: 12px
+            }
+
+            .kpi .value {
+                font-weight: 800;
+                font-size: 22px
+            }
+
+            .kpi .trend {
+                font-size: 12px
+            }
+
+            .kpi.up .trend {
+                color: #059669
+            }
+
+            .kpi.down .trend {
+                color: #dc2626
+            }
+
+        .panels {
+            display: grid;
+            grid-template-columns: 2fr 1.3fr;
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+            .card h6 {
+                font-weight: 700;
+                margin: 0 0 10px
+            }
+
+        .small-muted {
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        /* table */
+        .table-clean {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px
+        }
+
+            .table-clean th {
+                color: var(--muted);
+                font-weight: 600;
+                font-size: .85rem
+            }
+
+            .table-clean td, .table-clean th {
+                padding: 10px 12px
+            }
+
+            .table-clean tbody tr {
+                background: #fff;
+                border: 1px solid var(--line)
+            }
+
+                .table-clean tbody tr td:first-child {
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px
+                }
+
+                .table-clean tbody tr td:last-child {
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px
+                }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .badge-pill {
+            background: var(--pill);
+            color: #1d4ed8;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600
+        }
+
+        /* ===== NEW: widget building blocks ===== */
+        .hx-grid2 {
+            display: grid;
+            grid-template-columns: 2fr 1.6fr;
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .hx-grid4 {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .hx-view-all {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-weight: 800;
+            color: #249f42;
+            text-decoration: none;
+            padding: 12px
+        }
+
+        /* card header w/ icon + plus */
+        .hx-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px
+        }
+
+        .hx-head-left {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .hx-ico {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: #fde1df;
+            color: #d13b1e;
+            font-size: 18px
+        }
+
+        .hx-add {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid #9ad49e;
+            background: #e8f7ea;
+            display: grid;
+            place-items: center;
+            color: #2e7d32;
+            text-decoration: none
+        }
+
+        /* Today's work */
+        .hx-work {
+            border-top: 1px solid var(--line)
+        }
+
+        .hx-work-item {
+            display: grid;
+            grid-template-columns: 68px 1fr;
+            gap: 14px;
+            padding: 14px 6px;
+            border-top: 1px solid var(--line)
+        }
+
+        .hx-time {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700
+        }
+
+            .hx-time small {
+                font-weight: 600;
+                color: var(--muted)
+            }
+
+        .hx-wbody {
+            border-left: 4px solid var(--primary);
+            padding-left: 12px
+        }
+
+        .hx-wtitle {
+            font-weight: 800;
+            color: #1967d2;
+            margin-bottom: 2px
+        }
+
+        .hx-wdesc {
+            color: #374151
+        }
+
+        .hx-work-item.purple .hx-wbody {
+            border-color: #8b5cf6
+        }
+
+        .hx-work-item.orange .hx-wbody {
+            border-color: #f97316
+        }
+
+        .hx-work-item.green .hx-wbody {
+            border-color: #22c55e
+        }
+
+        /* calendar */
+        .hx-cal {
+            border-top: 1px solid var(--line);
+            margin-top: 10px
+        }
+
+            .hx-cal table {
+                width: 100%;
+                border-collapse: collapse
+            }
+
+            .hx-cal th, .hx-cal td {
+                border-bottom: 1px solid var(--line)
+            }
+
+            .hx-cal thead th {
+                background: #f3f6ef;
+                padding: 10px;
+                text-align: left;
+                color: #111827
+            }
+
+            .hx-cal .timecol {
+                width: 110px;
+                color: #111827
+            }
+
+            .hx-cal tbody td {
+                height: 74px;
+                position: relative;
+                background: #fafdf8
+            }
+
+        .hx-event {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            top: 8px;
+            border-radius: 12px;
+            padding: 10px 12px;
+            color: #fff;
+            font-weight: 600;
+            line-height: 1.2
+        }
+
+            .hx-event.orange {
+                background: #fb8060
+            }
+
+            .hx-event.green {
+                background: #33b56b
+            }
+
+            .hx-event.blue {
+                background: #2f7df4
+            }
+
+        /* recruitment list */
+        .hx-rec-head {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 12px;
+            font-weight: 700;
+            color: #6b7280;
+            padding: 10px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .hx-rec-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .hx-rec-name {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .hx-av {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #e5ecff;
+            color: #1f3bb3;
+            display: grid;
+            place-items: center;
+            font-weight: 800
+        }
+
+        /* performance bars */
+        .hx-perf {
+            margin-top: 6px
+        }
+
+        .hx-perf-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 10px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .hx-bar {
+            height: 10px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            position: relative;
+            overflow: hidden
+        }
+
+            .hx-bar > span {
+                position: absolute;
+                inset: 0 0 0 auto;
+                width: var(--w,50%);
+                background: linear-gradient(90deg,#22c55e,#16a34a)
+            }
+
+        /* responsive */
+        @@media (max-width: 1200px) {
+            .kpis {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .panels {
+                grid-template-columns: 1fr
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr
+            }
+
+            .hx-grid2 {
+                grid-template-columns: 1fr
+            }
+
+            .hx-grid4 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @@media (max-width: 640px) {
+            .kpis {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+    </style>
+}
+
+<div class="dash">
+
+    <!-- ===== Header ===== -->
+    <div class="dash-header">
+        <div>
+            <div class="hello">Welcome back, Team Halo Axis 👋</div>
+            <div class="meta">Here’s what’s happening across HR, Payroll, Accounting & Projects today.</div>
+        </div>
+        <div class="quick-actions">
+            <a class="qa" asp-controller="LeaveRequest" asp-action="Create"><i class="bi bi-calendar-plus"></i> New Leave</a>
+            <a class="qa" asp-controller="Payroll" asp-action="Run"><i class="bi bi-cash-coin"></i> Run Payroll</a>
+            <a class="qa" asp-controller="Project" asp-action="Create"><i class="bi bi-kanban"></i> New Project</a>
+            <a class="qa" asp-controller="Invoice" asp-action="Create"><i class="bi bi-receipt"></i> Create Invoice</a>
+        </div>
+    </div>
+
+    <!-- ===== KPI row ===== -->
+    <div class="kpis">
+        <div class="kpi up"><div class="label">Headcount</div><div class="value">128</div><div class="trend">+5 this month</div></div>
+        <div class="kpi"><div class="label">Active Projects</div><div class="value">24</div><div class="trend">7 due this week</div></div>
+        <div class="kpi"><div class="label">Payroll Date</div><div class="value">25 Aug</div><div class="trend">Cutoff: 21 Aug</div></div>
+        <div class="kpi up"><div class="label">Revenue (MTD)</div><div class="value">$214k</div><div class="trend">+12.3%</div></div>
+        <div class="kpi down"><div class="label">Overdue Invoices</div><div class="value">$18.6k</div><div class="trend">-2 open</div></div>
+        <div class="kpi"><div class="label">Pending Approvals</div><div class="value">11</div><div class="trend">6 leave • 5 expense</div></div>
+    </div>
+
+    <!-- ===== Charts & side panel ===== -->
+    <div class="panels">
+        <div class="card">
+            <h6>Finance Overview</h6>
+            <div class="small-muted">Revenue vs Expenses (last 12 months)</div>
+            <canvas id="finChart" height="110"></canvas>
+        </div>
+
+        <div class="card">
+            <h6>Headcount by Department</h6>
+            <div class="small-muted">Current FTE split</div>
+            <canvas id="deptChart" height="110"></canvas>
+        </div>
+    </div>
+
+    <!-- ===== Your existing tables ===== -->
+    <div class="grid-3">
+        <div class="card">
+            <h6>Upcoming Payroll Tasks</h6>
+            <table class="table-clean">
+                <thead><tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>Collect timesheets</td><td>HR Ops</td><td>Aug 18</td><td><span class="badge-pill">In progress</span></td></tr>
+                    <tr><td>Overtime approvals</td><td>Managers</td><td>Aug 19</td><td><span class="badge-pill">Pending</span></td></tr>
+                    <tr><td>Finalize payroll</td><td>Payroll</td><td>Aug 22</td><td><span class="badge-pill">Scheduled</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h6>My Approvals</h6>
+            <ul class="list-unstyled mb-0">
+                <li class="py-2 d-flex justify-content-between"><div><strong>Leave</strong> • Kamrul Hassan (3 days)</div><span class="badge-pill">Awaiting</span></li>
+                <li class="py-2 d-flex justify-content-between"><div><strong>Expense</strong> • Travel—$420.50</div><span class="badge-pill">Awaiting</span></li>
+                <li class="py-2 d-flex justify-content-between"><div><strong>PO</strong> • Laptops (5)</div><span class="badge-pill">Review</span></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h6>Recent Activity</h6>
+            <ul class="list-unstyled mb-0 small">
+                <li class="py-2"><i class="bi bi-check2-circle me-1 text-success"></i> Project “Atlas” sprint closed.</li>
+                <li class="py-2"><i class="bi bi-people me-1 text-primary"></i> 2 new hires onboarded.</li>
+                <li class="py-2"><i class="bi bi-receipt me-1 text-warning"></i> Invoice INV-1048 overdue by 3 days.</li>
+                <li class="py-2"><i class="bi bi-cash-coin me-1 text-info"></i> August payroll created.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== NEW: Today’s Work + Calendar ===== -->
+    <div class="hx-grid2">
+        <div class="card">
+            <div class="hx-head">
+                <div class="hx-head-left"><div class="hx-ico"><i class="bi bi-megaphone-fill"></i></div><h6>Today’s Work</h6></div>
+                <a href="#" class="hx-add"><i class="bi bi-plus-lg"></i></a>
+            </div>
+            <div class="hx-work">
+                <div class="hx-work-item">
+                    <div class="hx-time">08:10<br><small>am</small></div>
+                    <div class="hx-wbody"><div class="hx-wtitle">Interview</div><div class="hx-wdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</div></div>
+                </div>
+                <div class="hx-work-item purple">
+                    <div class="hx-time">09:30<br><small>am</small></div>
+                    <div class="hx-wbody"><div class="hx-wtitle">Meeting</div><div class="hx-wdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</div></div>
+                </div>
+                <div class="hx-work-item orange">
+                    <div class="hx-time">11:00<br><small>am</small></div>
+                    <div class="hx-wbody"><div class="hx-wtitle" style="color:#e11d48">Task</div><div class="hx-wdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</div></div>
+                </div>
+                <div class="hx-work-item green">
+                    <div class="hx-time">02:00<br><small>pm</small></div>
+                    <div class="hx-wbody"><div class="hx-wtitle" style="color:#059669">Training</div><div class="hx-wdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod…</div></div>
+                </div>
+            </div>
+            <a href="#" class="hx-view-all">View all <i class="bi bi-arrow-right-short ms-1"></i></a>
+        </div>
+
+        <div class="card">
+            <div class="hx-head">
+                <div class="hx-head-left"><div class="hx-ico" style="background:#dbeafe;color:#1e40af"><i class="bi bi-calendar2-event"></i></div><h6>Calendar</h6></div>
+                <a href="#" class="hx-add"><i class="bi bi-plus-lg"></i></a>
+            </div>
+            <div class="hx-cal">
+                <table>
+                    <thead><tr><th class="timecol">Time</th><th>Sun</th><th>Mon</th><th>Tue</th></tr></thead>
+                    <tbody>
+                        <tr><td class="timecol">09:00 AM</td><td></td><td><div class="hx-event orange">9:00 AM<br>Attendance Check</div></td><td></td></tr>
+                        <tr><td class="timecol">10:00 AM</td><td></td><td></td><td><div class="hx-event green">10:30 PM<br>Training</div></td></tr>
+                        <tr><td class="timecol">11:00 AM</td><td></td><td><div class="hx-event blue">11:00 PM<br>Meeting with SD team</div></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#" class="hx-view-all">View all <i class="bi bi-arrow-right-short ms-1"></i></a>
+        </div>
+    </div>
+
+    <!-- ===== NEW: Recruitment + Acquisition ===== -->
+    <div class="hx-grid2">
+        <div class="card">
+            <div class="hx-head">
+                <div class="hx-head-left"><div class="hx-ico" style="background:#e7f6d5;color:#3f6212"><i class="bi bi-person-badge-fill"></i></div><h6>Recruitment Process</h6></div>
+                <i class="bi bi-funnel text-muted"></i>
+            </div>
+            <div class="hx-rec-head"><div>Full name</div><div>Department</div><div>Stage</div></div>
+            <div class="hx-rec-row"><div class="hx-rec-name"><div class="hx-av">KM</div> Kathryn Murphy</div><div>Operations</div><div><span class="badge-pill" style="background:#e6f9ec;color:#166534">Final Interview</span></div></div>
+            <div class="hx-rec-row"><div class="hx-rec-name"><div class="hx-av">DR</div> Dianne Russell</div><div>Software Development</div><div><span class="badge-pill" style="background:#ffeceb;color:#b91c1c">Tech Interview</span></div></div>
+            <div class="hx-rec-row"><div class="hx-rec-name"><div class="hx-av">SN</div> Savannah Nguyen</div><div>Business Development</div><div><span class="badge-pill" style="background:#fff7df;color:#a16207">Resume Review</span></div></div>
+            <div class="hx-rec-row"><div class="hx-rec-name"><div class="hx-av">LA</div> Leslie Alexander</div><div>Software Implementation</div><div><span class="badge-pill" style="background:#ffeceb;color:#b91c1c">Tech interview</span></div></div>
+            <div class="hx-rec-row"><div class="hx-rec-name"><div class="hx-av">JJ</div> Jacob Jones</div><div>Finance</div><div><span class="badge-pill" style="background:#e6f9ec;color:#166534">Final Interview</span></div></div>
+            <a href="#" class="hx-view-all">View all <i class="bi bi-arrow-right-short ms-1"></i></a>
+        </div>
+
+        <div class="card">
+            <div class="hx-head">
+                <div class="hx-head-left"><div class="hx-ico" style="background:#d1fae5;color:#065f46"><i class="bi bi-mic-fill"></i></div><h6>Acquisition</h6></div>
+                <i class="bi bi-funnel text-muted"></i>
+            </div>
+            <canvas id="acqDonut" height="180"></canvas>
+            <div class="d-flex gap-4 flex-wrap mt-2">
+                <div><span class="badge-pill" style="background:#e6f9ec;color:#166534">Shortlisted</span> 20</div>
+                <div><span class="badge-pill" style="background:#ffeceb;color:#b91c1c">Rejected</span> 04</div>
+                <div><span class="badge-pill" style="background:#fff7df;color:#a16207">On Hold</span> 02</div>
+                <div><span class="badge-pill" style="background:#eef4ff;color:#1d4ed8">Selected</span> 02</div>
+            </div>
+            <a href="#" class="hx-view-all">View all <i class="bi bi-arrow-right-short ms-1"></i></a>
+        </div>
+    </div>
+
+    <!-- ===== NEW: Attendance & Leave ===== -->
+    <div class="card" style="margin-top:12px;">
+        <div class="hx-head">
+            <div class="hx-head-left"><div class="hx-ico"><i class="bi bi-currency-dollar"></i></div><h6>Attendance & Leave</h6></div>
+            <div class="btn btn-light border rounded-3"><i class="bi bi-calendar3"></i> 1 Jan 2023 - 30 Dec 2023</div>
+        </div>
+        <canvas id="attStack" height="120"></canvas>
+        <a href="#" class="hx-view-all">View all <i class="bi bi-arrow-right-short ms-1"></i></a>
+    </div>
+
+    <!-- ===== NEW: Project + Performance + Team Progress ===== -->
+    <div class="hx-grid4">
+        <div class="card">
+            <h6>Project Progress</h6>
+            <div class="d-flex align-items-center gap-4 mt-2">
+                <div style="width:210px"><canvas id="projDonut" height="210"></canvas></div>
+                <div class="small">
+                    <div class="mb-2"><span class="badge-pill" style="background:#e6f9ec;color:#166534">50 Complete</span></div>
+                    <div class="mb-2"><span class="badge-pill" style="background:#fff7df;color:#a16207">10 Ongoing</span></div>
+                    <div><span class="badge-pill" style="background:#ffeceb;color:#b91c1c">5 Pending</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="hx-head">
+                <div class="hx-head-left"><div class="hx-ico" style="background:#fdecc8;color:#a16207"><i class="bi bi-book"></i></div><h6>Performance Management</h6></div>
+                <i class="bi bi-funnel text-muted"></i>
+            </div>
+            <div class="hx-perf">
+                <div class="hx-perf-row"><div>1</div><div class="hx-bar" style="--w:100%"><span></span></div><div>100%</div></div>
+                <div class="hx-perf-row"><div>2</div><div class="hx-bar" style="--w:62%"><span></span></div><div>62%</div></div>
+                <div class="hx-perf-row"><div>3</div><div class="hx-bar" style="--w:85%"><span></span></div><div>85%</div></div>
+                <div class="hx-perf-row"><div>4</div><div class="hx-bar" style="--w:23%;background:#fff1f2"><span style="background:#ef4444"></span></div><div>23%</div></div>
+                <div class="hx-perf-row"><div>5</div><div class="hx-bar" style="--w:42%;background:#fff7df"><span style="background:#f59e0b"></span></div><div>42%</div></div>
+            </div>
+            <a href="#" class="hx-view-all">View all <i class="bi bi-arrow-right-short ms-1"></i></a>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+            <h6>Team Progress</h6>
+            <div class="row g-3 mt-1">
+                <div class="col-md-4"><canvas id="spark1" height="80"></canvas><div class="small-muted mt-1">UI/UX</div></div>
+                <div class="col-md-4"><canvas id="spark2" height="80"></canvas><div class="small-muted mt-1">Motion</div></div>
+                <div class="col-md-4"><canvas id="spark3" height="80"></canvas><div class="small-muted mt-1">Graphic</div></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script>
+        // Finance line chart
+        new Chart(document.getElementById('finChart'), {
+          type:'line',
+          data:{labels:['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
+            datasets:[
+              {label:'Revenue', data:[110,120,130,140,150,165,172,180,190,200,210,214], tension:.35, borderWidth:2, fill:false},
+              {label:'Expenses', data:[80,85,92,95,100,108,112,116,124,128,130,135], tension:.35, borderWidth:2, fill:false}
+            ]},
+          options:{responsive:true, plugins:{legend:{position:'bottom'}}, scales:{y:{beginAtZero:true}}}
+        });
+
+        // Department bar chart
+        new Chart(document.getElementById('deptChart'), {
+          type:'bar',
+          data:{labels:['HR','Finance','Sales','Engineering','Support','Ops'], datasets:[{label:'FTE', data:[8,12,22,54,18,14]}]},
+          options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+        });
+
+        // Acquisition donut
+        new Chart(document.getElementById('acqDonut'), {
+          type:'doughnut',
+          data:{ labels:['Selected','Shortlisted','On Hold','Rejected'], datasets:[{ data:[2,20,2,4] }] },
+          options:{ plugins:{legend:{position:'bottom'}}, cutout:'60%'}
+        });
+
+        // Attendance & Leave (stacked)
+        new Chart(document.getElementById('attStack'), {
+          type:'bar',
+          data:{
+            labels:['1 Jan','2 Jan','3 Jan','4 Jan','5 Jan','6 Jan','8 Jan','9 Jan','10 Jan','11 Jan','12 Jan','13 Jan'],
+            datasets:[
+              {label:'On Time Arrival', data:[45,38,46,41,30,32,44,39,33,47,53,59]},
+              {label:'On Time Late',    data:[18,14,16,12,13,12,16,18,17,19,21,23]},
+              {label:'On Leave',        data:[12,11,13,12,11,10,18,16,14,15,20,24]},
+            ]},
+          options:{plugins:{legend:{position:'top'}}, scales:{x:{stacked:true}, y:{stacked:true, beginAtZero:true, ticks:{callback:v=>v+'%'}}}}
+        });
+
+        // Project progress donut
+        new Chart(document.getElementById('projDonut'), {
+          type:'doughnut',
+          data:{ labels:['Complete','Ongoing','Pending'], datasets:[{ data:[50,10,5] }] },
+          options:{ plugins:{legend:{position:'bottom'}}, cutout:'70%' }
+        });
+
+        // Team progress sparklines
+        const spark = (id, data) => new Chart(document.getElementById(id), {
+          type:'line',
+          data:{ labels:data.map((_,i)=>i+1), datasets:[{ data, tension:.4, borderWidth:2, pointRadius:0, fill:false }] },
+          options:{ plugins:{legend:{display:false}}, scales:{x:{display:false},y:{display:false}} }
+        });
+        spark('spark1',[4,8,5,9,12,9,11,13,10,12,11,12]);
+        spark('spark2',[9,7,6,8,6,5,7,8,7,6,7,8]);
+        spark('spark3',[3,4,5,6,7,6,7,8,9,8,7,9]);
+    </script>
+}

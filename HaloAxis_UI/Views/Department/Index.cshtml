@@ -1,0 +1,41 @@
+﻿@model List<HaloAxis_UI.Models.DepartmentDto>
+@{
+    Layout = "_Layout"; ViewData["Title"] = "Department";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">Department</h4>
+    <a asp-action="Create" class="btn btn-primary">Create Department</a>
+</div>
+
+@if (TempData["Flash"] is string flash)
+{
+    <div class="alert alert-success">@flash</div>
+}
+
+<div class="table-responsive">
+    <table class="table table-sm align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="width:180px">Department Code</th>
+                <th>Department Name</th>
+                <th style="width:160px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.DeptCode</td>
+                    <td>@d.DeptName</td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@d.Id" class="btn btn-light btn-sm">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@d.Id" method="post" class="d-inline">
+                            <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Delete this item?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
