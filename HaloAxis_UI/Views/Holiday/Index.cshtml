@@ -1,0 +1,101 @@
+﻿@model List<HaloAxis_UI.Models.HolidayApiItem>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Holiday";
+    var page = (int)(ViewBag.Page ?? 1);
+    var size = (int)(ViewBag.Size ?? 8);
+    var totalPages = (int)(ViewBag.TotalPages ?? 1);
+    string search = ViewBag.Search ?? "";
+    string country = ViewBag.Country ?? "";
+    bool? onlyActive = ViewBag.OnlyActive as bool?;
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">Holiday</h3>
+
+    <form method="get" class="d-flex gap-2">
+        <input name="search" class="form-control" placeholder="Search" value="@search" />
+        <input name="country" class="form-control" placeholder="Country" value="@country" />
+        <select name="onlyActive" class="form-select" style="max-width:140px">
+            <option value="">All</option>
+            <option value="true" selected="@(onlyActive==true)">Active</option>
+            <option value="false" selected="@(onlyActive==false)">Inactive</option>
+        </select>
+        <button class="btn btn-outline-secondary">Search</button>
+        <a asp-action="Create" class="btn btn-primary">Add New</a>
+    </form>
+</div>
+
+@if (TempData["ok"] is string ok)  { <div class="alert alert-success">@ok</div> }
+@if (TempData["err"] is string err){ <div class="alert alert-danger">@err</div> }
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th style="width:60px">No</th>
+            <th>Name</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Country</th>
+            <th>Weekend</th>
+            <th>Total Holiday</th>
+            <th>Color</th>
+            <th>Status</th>
+            <th style="width:140px"></th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        var i = (page-1)*size;
+    }
+    @foreach (var x in Model)
+    {
+        i++;
+        var weekend = string.Join(", ", new[]{x.Weekday1,x.Weekday2,x.Weekday3,x.Weekday4,x.Weekday5,x.Weekday6,x.Weekday7}.Where(s => !string.IsNullOrWhiteSpace(s)));
+        <tr>
+            <td>@i.ToString("00")</td>
+            <td>@x.Name</td>
+            <td>@x.FromDate?.ToString("dd-MM-yyyy")</td>
+            <td>@x.ToDate?.ToString("dd-MM-yyyy")</td>
+            <td>@x.Country</td>
+            <td>@weekend</td>
+            <td>@(x.HolidayLists?.Count ?? 0)</td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(x.Color))
+                { <span class="badge" style="background:@x.Color">@x.Color</span> }
+            </td>
+            <td>
+                @if (x.IsActive == true)
+                { <span class="badge bg-success">Active</span> }
+                else
+                { <span class="badge bg-secondary">Inactive</span> }
+            </td>
+            <td class="text-end">
+                <a asp-action="Edit" asp-route-id="@x.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                <form asp-action="Delete" asp-route-id="@x.Id" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this holiday?')">Del</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<nav class="d-flex justify-content-between">
+    <div>Showing page @@page of @totalPages</div>
+    <ul class="pagination mb-0">
+        <li class="page-item @(page<=1?"disabled":"")">
+            <a class="page-link" href="@Url.Action("Index", new { page = page-1, size, search, country, onlyActive })">&laquo;</a>
+        </li>
+        @for (var p = Math.Max(1, page-2); p <= Math.Min(totalPages, page+2); p++)
+        {
+            <li class="page-item @(p==page?"active":"")">
+                <a class="page-link" href="@Url.Action("Index", new { page=p, size, search, country, onlyActive })">@p</a>
+            </li>
+        }
+        <li class="page-item @(page>=totalPages?"disabled":"")">
+            <a class="page-link" href="@Url.Action("Index", new { page = page+1, size, search, country, onlyActive })">&raquo;</a>
+        </li>
+    </ul>
+</nav>

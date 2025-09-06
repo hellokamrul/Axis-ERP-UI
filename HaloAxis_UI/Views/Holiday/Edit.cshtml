@@ -1,0 +1,272 @@
+﻿@model HaloAxis_UI.Models.HolidayFormVm
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery AF
+
+@{
+    var isEdit = !string.IsNullOrWhiteSpace(Model?.Id);
+    ViewData["Title"] = isEdit ? "Edit Holiday List" : "New Holiday List";
+}
+<a asp-action="Index" class="text-decoration-none mb-3 d-inline-flex align-items-center">&larr; Back</a>
+
+<h3 class="mb-4">@ViewData["Title"]</h3>
+
+<form asp-action="@((isEdit) ? "Edit" : "Create")" asp-route-id="@Model?.Id" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="__af" value="@AF.GetAndStoreTokens(Context).RequestToken" />
+    <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <label class="form-label">Holiday List Name</label>
+            <input asp-for="Name" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Color</label>
+            <input asp-for="Color" class="form-control" placeholder="#5B5FF5" />
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">From Date</label>
+            <input asp-for="FromDate" type="date" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">To Date</label>
+            <input asp-for="ToDate" type="date" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="row mt-4 g-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title d-flex align-items-center justify-content-between">
+                        <span>Add Weekly Holidays</span>
+                        <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#weeklyBox">Toggle</button>
+                    </h5>
+                    <div id="weeklyBox" class="collapse show">
+                        <div class="input-group mb-3">
+                            <select id="weeklyDay" class="form-select">
+                                <option value="">Week day</option>
+                                <option>Sunday</option>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                            </select>
+                            <button id="btnAddWeeklyDay" type="button" class="btn btn-outline-primary">+</button>
+                        </div>
+                        <div id="weeklyChosen" class="d-flex flex-wrap gap-2"></div>
+                        <div class="mt-3">
+                            <button id="btnGenerateWeekends" type="button" class="btn btn-secondary">Add to List</button>
+                            <small class="text-muted ms-2">Generates all dates in range matching selected weekdays as Weekend rows.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title d-flex align-items-center justify-content-between">
+                        <span>Add Local Holidays</span>
+                        <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#localBox">Toggle</button>
+                    </h5>
+                    <div id="localBox" class="collapse show">
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <label class="form-label">Country</label>
+                                <input asp-for="Country" class="form-control" placeholder="Country" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">State</label>
+                                <input asp-for="State" class="form-control" placeholder="State/Region" />
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button id="btnAddEmpty" type="button" class="btn btn-outline-primary">Add empty row</button>
+                            <button id="btnClearRows" type="button" class="btn btn-outline-danger">Clear rows</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h5 class="card-title mb-0">Holiday Rows</h5>
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label"></label>
+                </div>
+            </div>
+
+            <table class="table" id="rowsTable">
+                <thead>
+                    <tr>
+                        <th style="width:90px">No</th>
+                        <th style="width:190px">Date</th>
+                        <th style="width:180px">Type</th>
+                        <th>Description</th>
+                        <th style="width:80px"></th>
+                    </tr>
+                </thead>
+                <tbody id="rowsBody">
+                    @for (var i = 0; i < Model.Lines.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <span class="row-idx">@(i + 1)</span>
+                                <input type="hidden" name="Lines[@i].Id" value="@Model.Lines[i].Id" />
+                                <input type="hidden" name="Lines[@i].HolidayId" value="@Model.Lines[i].HolidayId" />
+                            </td>
+
+                            <td><input name="Lines[@i].Date" value="@Model.Lines[i].Date" type="date" class="form-control" /></td>
+
+                            <td>
+                                <select name="Lines[@i].Type" class="form-select">
+                                    <option value="0" selected="@(Model.Lines[i].Type==0)">Weekend</option>
+                                    <option value="1" selected="@(Model.Lines[i].Type==1)">Local</option>
+                                </select>
+                            </td>
+
+                            <td><input name="Lines[@i].Description" value="@Model.Lines[i].Description" class="form-control" /></td>
+
+                            <td class="text-end">
+                                <button type="button" class="btn btn-sm btn-outline-danger btnDelRow">&times;</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="d-flex gap-2">
+                <button id="btnAddRow" type="button" class="btn btn-light">Add New Row</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+        <a asp-action="Index" class="btn btn-light">Cancel</a>
+        <button class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        const weeklyChosen = document.getElementById('weeklyChosen');
+        const weeklyDay = document.getElementById('weeklyDay');
+        document.getElementById('btnAddWeeklyDay').addEventListener('click', () => {
+          const v = weeklyDay.value;
+          if (!v) return;
+          if ([...weeklyChosen.querySelectorAll('input')].some(i => i.value === v)) return;
+          const chip = document.createElement('span');
+          chip.className = 'badge rounded-pill text-bg-secondary';
+          chip.style.cursor = 'pointer';
+          chip.innerText = v + '  ×';
+          const hidden = document.createElement('input');
+          hidden.type = 'hidden'; hidden.name = 'WeeklyOffDays'; hidden.value = v;
+          chip.addEventListener('click', () => chip.remove());
+          chip.appendChild(hidden);
+          weeklyChosen.appendChild(chip);
+          weeklyDay.value = '';
+        });
+
+        const tbody = document.getElementById('rowsBody');
+
+        function renumber() {
+          [...tbody.querySelectorAll('tr')].forEach((tr,i) => {
+            const idx = tr.querySelector('.row-idx');
+            if (idx) idx.textContent = (i+1);
+            tr.querySelectorAll('input,select').forEach(el => {
+              if (el.name) el.name = el.name.replace(/Lines\[\d+\]/, `Lines[${i}]`);
+            });
+          });
+        }
+
+        function addRow(date='', type='1', desc='') {
+          const i = tbody.querySelectorAll('tr').length;
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>
+              <span class="row-idx">${i+1}</span>
+            </td>
+            <td><input name="Lines[${i}].Date" type="date" class="form-control" value="${date}"/></td>
+            <td>
+              <select name="Lines[${i}].Type" class="form-select">
+                <option value="0" ${type==0?'selected':''}>Weekend</option>
+                <option value="1" ${type==1?'selected':''}>Local</option>
+              </select>
+            </td>
+            <td><input name="Lines[${i}].Description" class="form-control" value="${desc}"/></td>
+            <td class="text-end"><button type="button" class="btn btn-sm btn-outline-danger btnDelRow">&times;</button></td>`;
+          tbody.appendChild(tr);
+        }
+
+        document.getElementById('btnAddRow')    .addEventListener('click', () => addRow());
+        document.getElementById('btnAddEmpty')  ?.addEventListener('click', () => addRow());
+        document.getElementById('btnClearRows') ?.addEventListener('click', () => { tbody.innerHTML=''; });
+
+        // Delete row (API if it exists, otherwise just remove)
+        tbody.addEventListener('click', async (e) => {
+          const btn = e.target.closest('.btnDelRow');
+          if (!btn) return;
+
+          const tr = btn.closest('tr');
+          const idInput = tr.querySelector('input[name$=".Id"]');
+          const lineId = idInput ? (idInput.value || '').trim() : '';
+
+          if (!confirm('Delete this row?')) return;
+
+          if (lineId) {
+            const token = document.getElementById('__af').value;
+            const resp = await fetch('@Url.Action("RemoveLine", "Holiday")', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'RequestVerificationToken': token
+              },
+              body: new URLSearchParams({ id: lineId })
+            });
+            if (!resp.ok) {
+              const err = await resp.text();
+              alert('Delete failed: ' + err);
+              return;
+            }
+          }
+
+          tr.remove();
+          renumber();
+        });
+
+        // Generate weekend rows
+        document.getElementById('btnGenerateWeekends').addEventListener('click', () => {
+          const from = document.querySelector('input[name="FromDate"]').value;
+          const to   = document.querySelector('input[name="ToDate"]').value;
+          if (!from || !to) { alert('Select From/To dates first'); return; }
+
+          const days = [...weeklyChosen.querySelectorAll('input')].map(i => i.value);
+          if (days.length===0) return;
+
+          const start = new Date(from+"T00:00:00");
+          const end   = new Date(to+"T00:00:00");
+          const dayIndex = d => ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].indexOf(d);
+
+          for (const dName of days) {
+            let d = new Date(start);
+            while (d.getDay() !== dayIndex(dName)) d.setDate(d.getDate()+1);
+            for (; d <= end; d.setDate(d.getDate()+7)) {
+              const ymd = d.toISOString().substring(0,10);
+              if ([...tbody.querySelectorAll('input[type="date"]')].some(x => x.value === ymd)) continue;
+              addRow(ymd, 0, dName);
+            }
+          }
+          renumber();
+        });
+    </script>
+}

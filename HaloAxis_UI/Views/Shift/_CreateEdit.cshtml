@@ -1,0 +1,137 @@
+﻿@model ShiftDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="createShift" aria-labelledby="createShiftLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="createShiftLabel">Create Shift</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        <form asp-action="Create" method="post" id="shiftForm" novalidate>
+            @Html.AntiForgeryToken()
+
+            <!-- show API/ModelState errors -->
+            <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="ShiftName" class="form-label"></label>
+                    <input asp-for="ShiftName" class="form-control" required />
+                    <span asp-validation-for="ShiftName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="ShiftCode" class="form-label"></label>
+                    <input asp-for="ShiftCode" class="form-control" />
+                    <span asp-validation-for="ShiftCode" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="ShiftDesc" class="form-label"></label>
+                    <input asp-for="ShiftDesc" class="form-control" />
+                    <span asp-validation-for="ShiftDesc" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="ShiftType" class="form-label"></label>
+                    <select asp-for="ShiftType" class="form-select" id="shiftType" required>
+                        <option value="">Select</option>
+                        <option>General</option>
+                        <option>Shifting</option>
+                    </select>
+                    <span asp-validation-for="ShiftType" class="text-danger"></span>
+                </div>
+
+                <!-- Duration (HH:mm) -->
+                <div class="col-md-6">
+                    <label class="form-label">Regular Hour (HH:mm)</label>
+                    <input asp-for="RegularHour" class="form-control" placeholder="08:00"
+                           pattern="^\d{2}:\d{2}$" inputmode="numeric" />
+                    <small class="text-muted">Format: HH:mm</small>
+                    <span asp-validation-for="RegularHour" class="text-danger"></span>
+                </div>
+
+                <!-- Clock times (submit HH:mm; controller will convert to ISO UTC) -->
+                <div class="col-md-6">
+                    <label class="form-label">Shift In</label>
+                    <input asp-for="ShiftIn" class="form-control" type="time" step="60" required />
+                    <span asp-validation-for="ShiftIn" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Shift Out</label>
+                    <input asp-for="ShiftOut" class="form-control" type="time" step="60" required />
+                    <span asp-validation-for="ShiftOut" class="text-danger"></span>
+                </div>
+
+                <!-- Duration -->
+                <div class="col-md-6">
+                    <label class="form-label">Shift Late (HH:mm)</label>
+                    <input asp-for="ShiftLate" class="form-control" placeholder="00:15"
+                           pattern="^\d{2}:\d{2}$" inputmode="numeric" />
+                    <small class="text-muted">Grace: HH:mm</small>
+                    <span asp-validation-for="ShiftLate" class="text-danger"></span>
+                </div>
+
+                <!-- Duration -->
+                <div class="col-md-6">
+                    <label class="form-label">Lunch Time (HH:mm)</label>
+                    <input asp-for="LunchTime" class="form-control" placeholder="01:00"
+                           pattern="^\d{2}:\d{2}$" inputmode="numeric" />
+                    <span asp-validation-for="LunchTime" class="text-danger"></span>
+                </div>
+
+                <!-- Clock times -->
+                <div class="col-md-6">
+                    <label class="form-label">Lunch In</label>
+                    <input asp-for="LunchIn" class="form-control" type="time" step="60" />
+                    <span asp-validation-for="LunchIn" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Lunch Out</label>
+                    <input asp-for="LunchOut" class="form-control" type="time" step="60" />
+                    <span asp-validation-for="LunchOut" class="text-danger"></span>
+                </div>
+
+                <!-- Duration + clock times -->
+                <div class="col-md-4">
+                    <label class="form-label">Tiffin Time (HH:mm)</label>
+                    <input asp-for="TiffinTime" class="form-control" placeholder="00:30"
+                           pattern="^\d{2}:\d{2}$" inputmode="numeric" />
+                    <span asp-validation-for="TiffinTime" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Tiffin In</label>
+                    <input asp-for="TiffinIn" class="form-control" type="time" step="60" />
+                    <span asp-validation-for="TiffinIn" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Tiffin Out</label>
+                    <input asp-for="TiffinOut" class="form-control" type="time" step="60" />
+                    <span asp-validation-for="TiffinOut" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 form-check">
+                    <input asp-for="IsInactive" class="form-check-input" type="checkbox" />
+                    <label asp-for="IsInactive" class="form-check-label"></label>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">Cancel</button>
+                <button class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        // Optional: toggle UI based on shift type
+        document.getElementById('shiftType')?.addEventListener('change', function () {
+          const isGeneral = this.value === 'General';
+          // e.g., if 'Shifting', you could disable ShiftIn/Out and show a note
+        });
+    </script>
+}

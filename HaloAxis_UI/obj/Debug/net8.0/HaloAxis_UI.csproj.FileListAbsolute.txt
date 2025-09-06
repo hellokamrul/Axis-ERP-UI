@@ -230,3 +230,4 @@ E:\Personal Projects\Halo-Axis-UI\HaloAxis_UI\HaloAxis_UI\obj\Debug\net8.0\HaloA
 E:\Personal Projects\Halo-Axis-UI\HaloAxis_UI\HaloAxis_UI\obj\Debug\net8.0\HaloAxis_UI.genruntimeconfig.cache
 E:\Personal Projects\Halo-Axis-UI\HaloAxis_UI\HaloAxis_UI\obj\Debug\net8.0\ref\HaloAxis_UI.dll
 E:\Personal Projects\Halo-Axis-UI\HaloAxis_UI\HaloAxis_UI\obj\Debug\net8.0\scopedcss\Views\Shared\_LandingLayout.cshtml.rz.scp.css
+E:\Personal Projects\Halo-Axis-UI\HaloAxis_UI\HaloAxis_UI\obj\Debug\net8.0\HaloAxis_UI.sourcelink.json

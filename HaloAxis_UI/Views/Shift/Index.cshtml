@@ -1,0 +1,59 @@
+﻿@model List<ShiftDto>
+@{
+    ViewData["Title"] = "Shift List";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">Shift List</h3>
+
+    <form method="get" class="d-flex gap-2">
+        <input name="q" class="form-control" placeholder="Search by name/code" />
+        <button class="btn btn-outline-secondary">Search</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#createShift">Create Shift</button>
+    </form>
+</div>
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Shift Name</th>
+            <th>Shift Code</th>
+            <th>Shift Description</th>
+            <th>Shift In</th>
+            <th>Shift Out</th>
+            <th>Shift Late</th>
+            <th>Lunch Time</th>
+            <th>Lunch In</th>
+            <th>Lunch Out</th>
+            <th>Regular</th>
+            <th>Shift Type</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.ShiftName</td>
+                <td>@x.ShiftCode</td>
+                <td>@x.ShiftDesc</td>
+                <td>@x.ShiftIn</td>
+                <td>@x.ShiftOut</td>
+                <td>@x.ShiftLate</td>
+                <td>@x.LunchTime</td>
+                <td>@x.LunchIn</td>
+                <td>@x.LunchOut</td>
+                <td>@x.RegularHour</td>
+                <td>@x.ShiftType</td>
+                <td class="text-end">
+                    <form asp-action="Delete" asp-route-id="@x.Id" method="post" class="d-inline">
+                        <input name="__RequestVerificationToken" type="hidden" value="@@(Antiforgery.GetAndStoreTokens(HttpContext).RequestToken)" />
+                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this shift?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_CreateEdit", new ShiftDto())

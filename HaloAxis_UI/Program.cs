@@ -27,14 +27,14 @@ builder.Services.AddSession(o =>
     o.Cookie.HttpOnly = true;
     o.Cookie.IsEssential = true;
 });
-// ERP base, e.g. http://18.219.50.5:5228
+
+// ---- Existing typed clients you already had ----
 builder.Services.AddHttpClient<ICompanyApi, CompanyApi>((sp, http) =>
 {
     var cfg = sp.GetRequiredService<IConfiguration>();
-    var erp = cfg["Api:ErpBaseUrl"] ?? cfg["Api:BaseUrl"]; // fallback if you only have BaseUrl
+    var erp = cfg["Api:ErpBaseUrl"] ?? cfg["Api:BaseUrl"];
     http.BaseAddress = new Uri(erp!);
 });
-// after builder.Services.AddSession();
 
 builder.Services.AddHttpClient<IDepartmentApi, DepartmentApi>((sp, http) =>
 {
@@ -48,7 +48,6 @@ builder.Services.AddHttpClient<IDesignationApi, DesignationApi>((sp, http) =>
     http.BaseAddress = new Uri(cfg["Api:ErpBaseUrl"] ?? cfg["Api:BaseUrl"]!);
 });
 
-// ---- TWO TYPED HTTP CLIENTS ----
 // Auth API (5231)
 builder.Services.AddHttpClient<IAuthApi, AuthApi>((sp, http) =>
 {
@@ -56,15 +55,31 @@ builder.Services.AddHttpClient<IAuthApi, AuthApi>((sp, http) =>
     http.BaseAddress = new Uri(cfg["Api:AuthBaseUrl"]!);
 });
 
-// ERP API (5228) – UserCompany etc.
+// ERP API (for other endpoints)
 builder.Services.AddHttpClient<IUserCompanyApi, UserCompanyApi>((sp, http) =>
 {
     var cfg = sp.GetRequiredService<IConfiguration>();
     http.BaseAddress = new Uri(cfg["Api:ErpBaseUrl"]!);
 });
 
+// ---- Common, named ERP client everyone can use ----
+builder.Services.AddHttpClient("ErpApi", (sp, http) =>
+{
+    var cfg = sp.GetRequiredService<IConfiguration>();
+    var baseUrl = cfg["Api:ErpBaseUrl"] ?? throw new InvalidOperationException("Api:ErpBaseUrl missing.");
+    http.BaseAddress = new Uri(baseUrl);
+    http.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
+});
+
+// REQUIRED for ApiClient session access
+builder.Services.AddHttpContextAccessor();
+
+// One reusable API client (no per-resource interfaces needed)
+builder.Services.AddScoped<ApiClient>();
+
 var app = builder.Build();
-// add this BEFORE the default route
+
+// Routes
 app.MapControllerRoute(
     name: "company",
     pattern: "Company/{action=Index}/{id?}",
@@ -76,11 +91,9 @@ app.MapControllerRoute(
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
