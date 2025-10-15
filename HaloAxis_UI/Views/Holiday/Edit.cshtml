@@ -6,8 +6,8 @@
     var isEdit = !string.IsNullOrWhiteSpace(Model?.Id);
     ViewData["Title"] = isEdit ? "Edit Holiday List" : "New Holiday List";
 }
-<a asp-action="Index" class="text-decoration-none mb-3 d-inline-flex align-items-center">&larr; Back</a>
 
+<a asp-action="Index" class="text-decoration-none mb-3 d-inline-flex align-items-center">&larr; Back</a>
 <h3 class="mb-4">@ViewData["Title"]</h3>
 
 <form asp-action="@((isEdit) ? "Edit" : "Create")" asp-route-id="@Model?.Id" method="post">
@@ -36,6 +36,7 @@
     </div>
 
     <div class="row mt-4 g-4">
+        <!-- WEEKLY HOLIDAYS -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -67,6 +68,7 @@
             </div>
         </div>
 
+        <!-- LOCAL HOLIDAYS -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -78,10 +80,19 @@
                         <div class="row g-2">
                             <div class="col-12">
                                 <label class="form-label">Country</label>
-                                <input asp-for="Country" class="form-control" placeholder="Country" />
+                                <select id="countrySelect" asp-for="Country" class="form-select">
+                                    <option value="">Select Country</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="India">India</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="United States">United States</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Australia">Australia</option>
+                                </select>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">State</label>
+                                <label class="form-label">State / Region</label>
                                 <input asp-for="State" class="form-control" placeholder="State/Region" />
                             </div>
                         </div>
@@ -95,6 +106,7 @@
         </div>
     </div>
 
+    <!-- HOLIDAY ROWS TABLE -->
     <div class="card mt-4">
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -119,26 +131,16 @@
                     @for (var i = 0; i < Model.Lines.Count; i++)
                     {
                         <tr>
-                            <td>
-                                <span class="row-idx">@(i + 1)</span>
-                                <input type="hidden" name="Lines[@i].Id" value="@Model.Lines[i].Id" />
-                                <input type="hidden" name="Lines[@i].HolidayId" value="@Model.Lines[i].HolidayId" />
-                            </td>
-
+                            <td><span class="row-idx">@(i + 1)</span></td>
                             <td><input name="Lines[@i].Date" value="@Model.Lines[i].Date" type="date" class="form-control" /></td>
-
                             <td>
                                 <select name="Lines[@i].Type" class="form-select">
                                     <option value="0" selected="@(Model.Lines[i].Type==0)">Weekend</option>
                                     <option value="1" selected="@(Model.Lines[i].Type==1)">Local</option>
                                 </select>
                             </td>
-
                             <td><input name="Lines[@i].Description" value="@Model.Lines[i].Description" class="form-control" /></td>
-
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-outline-danger btnDelRow">&times;</button>
-                            </td>
+                            <td class="text-end"><button type="button" class="btn btn-sm btn-outline-danger btnDelRow">&times;</button></td>
                         </tr>
                     }
                 </tbody>
@@ -158,115 +160,225 @@
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+
     <script>
         const weeklyChosen = document.getElementById('weeklyChosen');
         const weeklyDay = document.getElementById('weeklyDay');
-        document.getElementById('btnAddWeeklyDay').addEventListener('click', () => {
-          const v = weeklyDay.value;
-          if (!v) return;
-          if ([...weeklyChosen.querySelectorAll('input')].some(i => i.value === v)) return;
-          const chip = document.createElement('span');
-          chip.className = 'badge rounded-pill text-bg-secondary';
-          chip.style.cursor = 'pointer';
-          chip.innerText = v + '  ×';
-          const hidden = document.createElement('input');
-          hidden.type = 'hidden'; hidden.name = 'WeeklyOffDays'; hidden.value = v;
-          chip.addEventListener('click', () => chip.remove());
-          chip.appendChild(hidden);
-          weeklyChosen.appendChild(chip);
-          weeklyDay.value = '';
-        });
-
         const tbody = document.getElementById('rowsBody');
 
+        // --- Add selected weekday badge ---
+        document.getElementById('btnAddWeeklyDay').addEventListener('click', () => {
+            const v = weeklyDay.value;
+            if (!v) return;
+            if ([...weeklyChosen.querySelectorAll('input')].some(i => i.value === v)) return;
+
+            const chip = document.createElement('span');
+            chip.className = 'badge rounded-pill text-bg-secondary px-3 py-2';
+            chip.style.cursor = 'pointer';
+            chip.textContent = v + ' ×';
+
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'WeeklyOffDays';
+            hidden.value = v;
+
+            chip.appendChild(hidden);
+            chip.addEventListener('click', () => chip.remove());
+            weeklyChosen.appendChild(chip);
+            weeklyDay.value = '';
+        });
+
+        // --- Add new row ---
+        function addRow(date = '', type = '0', desc = '') {
+            const i = tbody.querySelectorAll('tr').length;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><span class="row-idx">${i + 1}</span></td>
+                <td><input name="Lines[${i}].Date" type="date" class="form-control" value="${date}" required></td>
+                <td>
+                    <select name="Lines[${i}].Type" class="form-select">
+                        <option value="0" ${type == 0 ? 'selected' : ''}>Weekend</option>
+                        <option value="1" ${type == 1 ? 'selected' : ''}>Local</option>
+                    </select>
+                </td>
+                <td><input name="Lines[${i}].Description" class="form-control" value="${desc}" required></td>
+                <td class="text-end"><button type="button" class="btn btn-sm btn-outline-danger btnDelRow">&times;</button></td>`;
+            tbody.appendChild(tr);
+        }
+
+        // --- Re-number inputs ---
         function renumber() {
-          [...tbody.querySelectorAll('tr')].forEach((tr,i) => {
-            const idx = tr.querySelector('.row-idx');
-            if (idx) idx.textContent = (i+1);
-            tr.querySelectorAll('input,select').forEach(el => {
-              if (el.name) el.name = el.name.replace(/Lines\[\d+\]/, `Lines[${i}]`);
+            [...tbody.querySelectorAll('tr')].forEach((tr, i) => {
+                tr.querySelector('.row-idx').textContent = i + 1;
+                tr.querySelectorAll('input, select').forEach(el => {
+                    if (el.name) el.name = el.name.replace(/Lines\[\d+\]/, `Lines[${i}]`);
+                });
             });
-          });
         }
 
-        function addRow(date='', type='1', desc='') {
-          const i = tbody.querySelectorAll('tr').length;
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>
-              <span class="row-idx">${i+1}</span>
-            </td>
-            <td><input name="Lines[${i}].Date" type="date" class="form-control" value="${date}"/></td>
-            <td>
-              <select name="Lines[${i}].Type" class="form-select">
-                <option value="0" ${type==0?'selected':''}>Weekend</option>
-                <option value="1" ${type==1?'selected':''}>Local</option>
-              </select>
-            </td>
-            <td><input name="Lines[${i}].Description" class="form-control" value="${desc}"/></td>
-            <td class="text-end"><button type="button" class="btn btn-sm btn-outline-danger btnDelRow">&times;</button></td>`;
-          tbody.appendChild(tr);
+        // --- Highlight weekend rows ---
+        function highlightWeekends() {
+            [...tbody.querySelectorAll('tr')].forEach(tr => {
+                const desc = tr.querySelector('input[name$=".Description"]').value?.toLowerCase();
+                const typeSel = tr.querySelector('select[name$=".Type"]').value;
+                const isWeekend = typeSel === "0";
+
+                if (isWeekend && /(friday|saturday|sunday)/.test(desc)) {
+                    tr.style.backgroundColor = '#f7faff';
+                } else if (isWeekend) {
+                    tr.style.backgroundColor = '#fafbff';
+                } else {
+                    tr.style.backgroundColor = '';
+                }
+            });
         }
 
-        document.getElementById('btnAddRow')    .addEventListener('click', () => addRow());
-        document.getElementById('btnAddEmpty')  ?.addEventListener('click', () => addRow());
-        document.getElementById('btnClearRows') ?.addEventListener('click', () => { tbody.innerHTML=''; });
-
-        // Delete row (API if it exists, otherwise just remove)
-        tbody.addEventListener('click', async (e) => {
-          const btn = e.target.closest('.btnDelRow');
-          if (!btn) return;
-
-          const tr = btn.closest('tr');
-          const idInput = tr.querySelector('input[name$=".Id"]');
-          const lineId = idInput ? (idInput.value || '').trim() : '';
-
-          if (!confirm('Delete this row?')) return;
-
-          if (lineId) {
-            const token = document.getElementById('__af').value;
-            const resp = await fetch('@Url.Action("RemoveLine", "Holiday")', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'RequestVerificationToken': token
-              },
-              body: new URLSearchParams({ id: lineId })
+        // --- Sort rows by date ascending ---
+        function sortRowsByDate() {
+            const rows = [...tbody.querySelectorAll('tr')];
+            rows.sort((a, b) => {
+                const dateA = new Date(a.querySelector('input[type="date"]').value);
+                const dateB = new Date(b.querySelector('input[type="date"]').value);
+                return dateA - dateB;
             });
-            if (!resp.ok) {
-              const err = await resp.text();
-              alert('Delete failed: ' + err);
-              return;
+            tbody.innerHTML = '';
+            rows.forEach(r => tbody.appendChild(r));
+            renumber();
+            highlightWeekends();
+        }
+
+        // --- Buttons ---
+        document.getElementById('btnAddRow').addEventListener('click', () => { addRow(); sortRowsByDate(); });
+        document.getElementById('btnAddEmpty').addEventListener('click', () => { addRow(); sortRowsByDate(); });
+        document.getElementById('btnClearRows').addEventListener('click', () => { if (confirm('Clear all rows?')) tbody.innerHTML = ''; });
+
+        // --- Delete Row ---
+        tbody.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btnDelRow');
+            if (!btn) return;
+            if (confirm('Delete this row?')) {
+                btn.closest('tr').remove();
+                sortRowsByDate();
             }
-          }
-
-          tr.remove();
-          renumber();
         });
 
-        // Generate weekend rows
+        // --- Auto resort on manual edit ---
+        tbody.addEventListener('change', (e) => {
+            if (e.target.matches('input[type="date"], input[name$=".Description"], select[name$=".Type"]')) {
+                sortRowsByDate();
+            }
+        });
+
+        // --- Generate weekend rows automatically ---
         document.getElementById('btnGenerateWeekends').addEventListener('click', () => {
-          const from = document.querySelector('input[name="FromDate"]').value;
-          const to   = document.querySelector('input[name="ToDate"]').value;
-          if (!from || !to) { alert('Select From/To dates first'); return; }
+            const from = document.querySelector('input[name="FromDate"]').value;
+            const to = document.querySelector('input[name="ToDate"]').value;
+            if (!from || !to) { alert('Please select both From and To dates.'); return; }
 
-          const days = [...weeklyChosen.querySelectorAll('input')].map(i => i.value);
-          if (days.length===0) return;
+            const selectedDays = [...weeklyChosen.querySelectorAll('input')].map(i => i.value);
+            if (selectedDays.length === 0) { alert('Please select at least one weekly off day.'); return; }
 
-          const start = new Date(from+"T00:00:00");
-          const end   = new Date(to+"T00:00:00");
-          const dayIndex = d => ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].indexOf(d);
+            const start = new Date(from);
+            const end = new Date(to);
+            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-          for (const dName of days) {
-            let d = new Date(start);
-            while (d.getDay() !== dayIndex(dName)) d.setDate(d.getDate()+1);
-            for (; d <= end; d.setDate(d.getDate()+7)) {
-              const ymd = d.toISOString().substring(0,10);
-              if ([...tbody.querySelectorAll('input[type="date"]')].some(x => x.value === ymd)) continue;
-              addRow(ymd, 0, dName);
+            for (const dName of selectedDays) {
+                const targetDay = daysOfWeek.indexOf(dName);
+                let current = new Date(start);
+                while (current.getDay() !== targetDay) current.setDate(current.getDate() + 1);
+
+                while (current <= end) {
+                    const ymd = current.toISOString().split('T')[0];
+                    if (![...tbody.querySelectorAll('input[type="date"]')].some(x => x.value === ymd)) {
+                        addRow(ymd, 0, dName);
+                    }
+                    current.setDate(current.getDate() + 7);
+                }
             }
-          }
-          renumber();
+
+            sortRowsByDate();
         });
+
+               // --- Add local government holidays by country ---
+        document.getElementById('countrySelect').addEventListener('change', async (e) => {
+            const country = e.target.value;
+            const from = document.querySelector('input[name="FromDate"]').value;
+            const to = document.querySelector('input[name="ToDate"]').value;
+            if (!country || !from || !to) { alert('Please select country and From/To dates first.'); return; }
+
+            const start = new Date(from);
+            const end = new Date(to);
+            const yearStart = start.getFullYear();
+            const yearEnd = end.getFullYear();
+
+            // Supported country codes (Nager.Date)
+            const countryCodes = {
+                "India": "IN",
+                "Pakistan": "PK",
+                "United States": "US",
+                "United Kingdom": "GB",
+                "Canada": "CA",
+                "Australia": "AU"
+            };
+
+            let holidays = [];
+
+            // ---- CASE 1: Bangladesh (Custom Static Fallback) ----
+            if (country === "Bangladesh") {
+                const bdHolidays = [
+                    { date: `${yearStart}-02-21`, name: "Shaheed Day & International Mother Language Day" },
+                    { date: `${yearStart}-03-17`, name: "Sheikh Mujibur Rahman’s Birthday" },
+                    { date: `${yearStart}-03-26`, name: "Independence Day" },
+                    { date: `${yearStart}-05-01`, name: "May Day" },
+                    { date: `${yearStart}-08-15`, name: "National Mourning Day" },
+                    { date: `${yearStart}-12-16`, name: "Victory Day" },
+                    { date: `${yearStart}-12-25`, name: "Christmas Day" }
+                ];
+                holidays = bdHolidays.filter(h => {
+                    const d = new Date(h.date);
+                    return d >= start && d <= end;
+                });
+            }
+
+            // ---- CASE 2: Other countries using Nager API ----
+            else if (countryCodes[country]) {
+                const code = countryCodes[country];
+                try {
+                    // Handle ranges spanning multiple years
+                    for (let y = yearStart; y <= yearEnd; y++) {
+                        const resp = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${y}/${code}`);
+                        if (!resp.ok) continue;
+                        const data = await resp.json();
+                        holidays.push(...data.filter(h => {
+                            const d = new Date(h.date);
+                            return d >= start && d <= end;
+                        }));
+                    }
+                } catch (err) {
+                    console.error("Error fetching from Nager API:", err);
+                    alert("Failed to load public holidays.");
+                }
+            }
+
+            // ---- Add Holidays to Table ----
+            if (holidays.length === 0) {
+                alert(`No public holidays found for ${country} in selected range.`);
+                return;
+            }
+
+            let added = 0;
+            for (const h of holidays) {
+                const ymd = h.date;
+                if (![...tbody.querySelectorAll('input[type="date"]')].some(x => x.value === ymd)) {
+                    addRow(ymd, 1, h.localName || h.name);
+                    added++;
+                }
+            }
+
+            sortRowsByDate();
+            highlightWeekends();
+            alert(`${added} public holidays added for ${country}.`);
+        });
+
     </script>
 }
