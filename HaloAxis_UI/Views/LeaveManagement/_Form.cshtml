@@ -1,0 +1,138 @@
+﻿@model HaloAxis_UI.Models.LeaveManagementVM.LeaveComponentVM.LeaveComponentDTO
+
+<form asp-action="@(string.IsNullOrWhiteSpace(Model?.Id) ? "Create" : "Edit")" asp-route-id="@Model?.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <label class="form-label">Leave Type Name</label>
+            <input asp-for="Name" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Display Name</label>
+            <input asp-for="DisplayName" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Definition</label>
+            <input asp-for="Definition" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Color</label>
+            <input asp-for="Color" class="form-control" placeholder="#5B5FF5" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Leave Type</label>
+            <select asp-for="UnitType" class="form-select"
+                    asp-items="Html.GetEnumSelectList<HaloAxis_UI.Models.LeaveManagementVM.LeaveComponentVM.LeaveUnitType>()"></select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Max Allocation / Period</label>
+            <input asp-for="MaximumAllocationPerPeriod" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Apply After (Working Days)</label>
+            <input asp-for="ApplicationAfterWorkingDays" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Max Consecutive Leaves</label>
+            <input asp-for="MaximumConsecutiveLeaves" class="form-control" />
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label">Active</label>
+            </div>
+        </div>
+
+        <hr class="mt-2" />
+
+        <div class="col-12"><h6 class="text-muted">Carry Forward</h6></div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input asp-for="IsCarryForward" class="form-check-input" />
+                <label class="form-check-label">Allow Carry Forward</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Max Carry Forwarded Leaves</label>
+            <input asp-for="MaxCarryForwardedLeaves" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Expire Carry Forwarded (days)</label>
+            <input asp-for="ExpiryInDays" class="form-control" />
+        </div>
+
+        <div class="col-12"><h6 class="text-muted mt-2">Encashment</h6></div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input asp-for="IsEncashment" class="form-check-input" />
+                <label class="form-check-label">Allow Encashment</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Max Encashable Leaves</label>
+            <input asp-for="MaxEncashableLeaves" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Earning Components</label>
+            <input asp-for="EarningComponentId" class="form-control" placeholder="Component Id" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Non Encashable Leaves</label>
+            <input asp-for="NonEncashableLeaves" class="form-control" />
+        </div>
+
+        <div class="col-12"><h6 class="text-muted mt-2">Earned Leave</h6></div>
+        <div class="col-md-3">
+            <div class="form-check">
+                <input asp-for="IsEarnedLeave" class="form-check-input" />
+                <label class="form-check-label">Is Earned Leave</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Earned Frequency</label>
+            <select asp-for="Frequency" class="form-select"
+                    asp-items="Html.GetEnumSelectList<HaloAxis_UI.Models.LeaveManagementVM.LeaveComponentVM.EarnFrequency>()">
+                <option value="">--</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Allocate on Day</label>
+            <select asp-for="AllocateOnDay" class="form-select"
+                    asp-items="Html.GetEnumSelectList<HaloAxis_UI.Models.LeaveManagementVM.LeaveComponentVM.AllocateOnDayOption>()">
+                <option value="">--</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Rounding</label>
+            <input asp-for="RoundingRule" class="form-control" />
+        </div>
+
+        <div class="col-12"><h6 class="text-muted mt-2">Flags</h6></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="IsWithoutPay" class="form-check-input" /> <label class="form-check-label">Leave Without Pay</label></div></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="IsOptional" class="form-check-input" /> <label class="form-check-label">Optional Leave</label></div></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="IsPartiallyPaid" class="form-check-input" /> <label class="form-check-label">Partially Paid</label></div></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="AllowNegativeBalance" class="form-check-input" /> <label class="form-check-label">Allow Negative Balance</label></div></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="AllowOverAllocation" class="form-check-input" /> <label class="form-check-label">Allow Over Allocation</label></div></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="IncludeHolidaysWithinLeaves" class="form-check-input" /> <label class="form-check-label">Include holidays within leaves</label></div></div>
+        <div class="col-md-3"><div class="form-check"><input asp-for="IsCompensatory" class="form-check-input" /> <label class="form-check-label">Is Compensatory</label></div></div>
+
+        <div class="col-md-4">
+            <label class="form-label">Fraction of Daily Salary Per Leave</label>
+            <input asp-for="FractionOfDailySalary" class="form-control" />
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+        <a asp-action="Index" class="btn btn-light">Cancel</a>
+        <button class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

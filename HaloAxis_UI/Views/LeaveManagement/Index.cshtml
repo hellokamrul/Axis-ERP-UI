@@ -1,0 +1,124 @@
+﻿@model IEnumerable<HaloAxis_UI.Models.LeaveManagementVM.LeaveComponentVM.LeaveComponentDTO>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Leave Type";
+    var total = (int)(ViewBag.TotalCount ?? 0);
+    var page = (int)(ViewBag.PageIndex ?? 1);
+    var size = (int)(ViewBag.PageSize ?? 8);
+    int last = Math.Max(1, (int)Math.Ceiling(total / (double)size));
+    string q = ViewBag.Query as string ?? "";
+    bool onlyActive = ViewBag.OnlyActive ?? false;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Leave Type</h3>
+    <a asp-action="Create" class="btn btn-primary">Add New</a>
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-sm-4">
+        <label class="form-label">Search</label>
+        <input name="q" value="@q" class="form-control" placeholder="Search by name / display name" />
+    </div>
+    <div class="col-sm-3">
+        <label class="form-label">Status</label>
+        <select name="onlyActive" class="form-select">
+            <option value="false" selected="@(!onlyActive)">All</option>
+            <option value="true" selected="@(onlyActive)">Active only</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <label class="form-label">Show</label>
+        <select name="pageSize" class="form-select">
+            <option value="8" selected="@(size==8)">8</option>
+            <option value="25" selected="@(size==25)">25</option>
+            <option value="50" selected="@(size==50)">50</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-outline-secondary w-100">Filter</button>
+    </div>
+</form>
+
+@if (TempData["ok"] is string msg)
+{
+    <div class="alert alert-success py-2">@msg</div>
+}
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="width:56px">No</th>
+                <th>Leave Name</th>
+                <th>Display Name</th>
+                <th>Definition</th>
+                <th style="width:80px">Color</th>
+                <th style="width:110px">Leave Type</th>
+                <th style="width:130px">Max Con. L. A</th>
+                <th style="width:90px">Status</th>
+                <th style="width:120px" class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = (page - 1) * size;
+                foreach (var item in Model)
+                {
+                    i++;
+                    <tr>
+                        <td>@i.ToString("00")</td>
+                        <td>@item.Name</td>
+                        <td>@item.DisplayName</td>
+                        <td class="text-truncate" style="max-width:260px">@item.Definition</td>
+                        <td>@item.Color</td>
+                        <td>@item.UnitType</td>
+                        <td>@item.MaximumConsecutiveLeaves</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inactive</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this leave type?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (last > 1)
+{
+    <nav>
+        <ul class="pagination pagination-sm">
+            <li class="page-item @(page==1?"disabled":"")">
+                <a class="page-link" asp-action="Index" asp-route-page="@(page-1)" asp-route-pageSize="@size" asp-route-q="@q" asp-route-onlyActive="@onlyActive">«</a>
+            </li>
+            @for (int p = 1; p <= last; p++)
+            {
+                <li class="page-item @(p==page?"active":"")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@p" asp-route-pageSize="@size" asp-route-q="@q" asp-route-onlyActive="@onlyActive">@p</a>
+                </li>
+            }
+            <li class="page-item @(page==last?"disabled":"")">
+                <a class="page-link" asp-action="Index" asp-route-page="@(page+1)" asp-route-pageSize="@size" asp-route-q="@q" asp-route-onlyActive="@onlyActive">»</a>
+            </li>
+        </ul>
+    </nav>
+}

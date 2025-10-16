@@ -1,0 +1,10 @@
+﻿@model HaloAxis_UI.Models.LeaveManagementVM.LeaveComponentVM.LeaveComponentDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";   // or your _HaloAxis.cshtml
+    ViewData["Title"] = "Edit Leave Type";
+}
+
+<a asp-action="Index" class="text-decoration-none d-inline-flex align-items-center mb-3">&larr; Back</a>
+<h3 class="mb-3">@ViewData["Title"]</h3>
+
+@await Html.PartialAsync("_Form", Model)

@@ -3,6 +3,42 @@
   "WorkspaceRootPath": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\controllers\\leavemanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\controllers\\leavemanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\leavemanagement\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\leavemanagement\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\leavemanagement\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\leavemanagement\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\leavemanagement\\_form.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\leavemanagement\\_form.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\leavemanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\leavemanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\models\\leavemanagementvm\\leavecomponentvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\models\\leavemanagementvm\\leavecomponentvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\holiday\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\holiday\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -17,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\views\\holiday\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\views\\holiday\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,10 +105,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\services\\designationapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\services\\designationapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|solutionrelative:haloaxis_ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93B23713-DEDF-42BF-8562-196BD3DD816A}|HaloAxis_UI\\HaloAxis_UI.csproj|e:\\personal projects\\halo-axis-ui\\haloaxis_ui\\haloaxis_ui\\models\\housekeeping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -218,7 +246,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -226,20 +254,95 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\AccountController.cs",
-              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "HaloAxis_UI\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAswCEAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T21:10:28.305Z",
+              "DocumentIndex": 1,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\Edit.cshtml",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\LeaveManagement\\Edit.cshtml",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\Edit.cshtml",
+              "RelativeToolTip": "HaloAxis_UI\\Views\\LeaveManagement\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-16T12:19:42.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Form.cshtml",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\_Form.cshtml",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\LeaveManagement\\_Form.cshtml",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\_Form.cshtml",
+              "RelativeToolTip": "HaloAxis_UI\\Views\\LeaveManagement\\_Form.cshtml",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAkwIoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T11:59:03.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\Create.cshtml",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\LeaveManagement\\Create.cshtml",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\Create.cshtml",
+              "RelativeToolTip": "HaloAxis_UI\\Views\\LeaveManagement\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T11:58:13.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\Index.cshtml",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\LeaveManagement\\Index.cshtml",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\LeaveManagement\\Index.cshtml",
+              "RelativeToolTip": "HaloAxis_UI\\Views\\LeaveManagement\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T11:55:37.382Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "LeaveComponentVM.cs",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\LeaveManagementVM\\LeaveComponentVM.cs",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\LeaveManagementVM\\LeaveComponentVM.cs",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\LeaveManagementVM\\LeaveComponentVM.cs",
+              "RelativeToolTip": "HaloAxis_UI\\Models\\LeaveManagementVM\\LeaveComponentVM.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAkwFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T11:52:39.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LeaveManagementController.cs",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\LeaveManagementController.cs",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\LeaveManagementController.cs",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\LeaveManagementController.cs*",
+              "RelativeToolTip": "HaloAxis_UI\\Controllers\\LeaveManagementController.cs*",
+              "ViewState": "AgIAAAIAAAAAAAAAAADwvxMAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T11:50:42.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "HaloAxis_UI\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPMAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T11:44:00.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "AuthApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\AuthApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\AuthApi.cs",
@@ -252,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Holiday\\Index.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Holiday\\Index.cshtml",
@@ -260,38 +363,35 @@
               "RelativeToolTip": "HaloAxis_UI\\Views\\Holiday\\Index.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAAAAAGUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-06T17:28:21.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-06T17:28:21.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Program.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Program.cs",
               "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Program.cs",
               "RelativeToolTip": "HaloAxis_UI\\Program.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAswDQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAkwGMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-16T10:24:57.378Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-16T10:24:57.378Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Holiday\\Edit.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Holiday\\Edit.cshtml",
               "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Holiday\\Edit.cshtml",
               "RelativeToolTip": "HaloAxis_UI\\Views\\Holiday\\Edit.cshtml",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAAAAIBAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-06T17:29:04.727Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-06T17:29:04.727Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
               "Title": "HolidayController.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\HolidayController.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\HolidayController.cs",
@@ -299,12 +399,36 @@
               "RelativeToolTip": "HaloAxis_UI\\Controllers\\HolidayController.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAA3wC4AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-06T17:27:28.678Z",
+              "WhenOpened": "2025-09-06T17:27:28.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\appsettings.json",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\appsettings.json",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\appsettings.json",
+              "RelativeToolTip": "HaloAxis_UI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-16T10:24:26.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\AccountController.cs",
+              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "HaloAxis_UI\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAswCEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T21:10:28.305Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "HolidayFormVm.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\HolidayFormVm.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\HolidayFormVm.cs",
@@ -312,12 +436,11 @@
               "RelativeToolTip": "HaloAxis_UI\\Models\\HolidayFormVm.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAgwBcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-06T17:26:33.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-06T17:26:33.171Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 16,
               "Title": "ApiClient.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\ApiClient.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\ApiClient.cs",
@@ -329,7 +452,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 15,
               "Title": "HolidayApiModels.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\HolidayApiModels.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\HolidayApiModels.cs",
@@ -341,7 +464,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 17,
               "Title": "RequireCompanyAttribute.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Filters\\RequireCompanyAttribute.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Filters\\RequireCompanyAttribute.cs",
@@ -353,7 +476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 18,
               "Title": "FlexibleListConverter.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\Json\\FlexibleListConverter.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\Json\\FlexibleListConverter.cs",
@@ -365,7 +488,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 19,
               "Title": "ShiftController.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\ShiftController.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\ShiftController.cs",
@@ -378,7 +501,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 23,
               "Title": "DesignationController.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\DesignationController.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\DesignationController.cs",
@@ -391,7 +514,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 21,
               "Title": "ShiftDto.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\ShiftDto.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\ShiftDto.cs",
@@ -403,7 +526,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 22,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Shift\\Index.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Shift\\Index.cshtml",
@@ -415,7 +538,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 20,
               "Title": "_CreateEdit.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Shift\\_CreateEdit.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Shift\\_CreateEdit.cshtml",
@@ -427,7 +550,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 24,
               "Title": "DepartmentController.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\DepartmentController.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\DepartmentController.cs",
@@ -439,7 +562,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 28,
               "Title": "DesignationEditVm.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\DesignationEditVm.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\DesignationEditVm.cs",
@@ -451,7 +574,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 27,
               "Title": "IDesignationApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\Interface\\IDesignationApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\Interface\\IDesignationApi.cs",
@@ -463,19 +586,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\appsettings.json",
-              "RelativeDocumentMoniker": "HaloAxis_UI\\appsettings.json",
-              "ToolTip": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\appsettings.json",
-              "RelativeToolTip": "HaloAxis_UI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-16T10:24:26.053Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 25,
               "Title": "DesignationApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\DesignationApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\DesignationApi.cs",
@@ -488,7 +599,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 31,
               "Title": "DepartmentApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\DepartmentApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\DepartmentApi.cs",
@@ -500,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 29,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Designation\\Index.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Designation\\Index.cshtml",
@@ -512,7 +623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 26,
               "Title": "HouseKeeping.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\HouseKeeping.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\HouseKeeping.cs",
@@ -524,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 30,
               "Title": "DesignationIndexViewModel.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\DesignationIndexViewModel.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\DesignationIndexViewModel.cs",
@@ -536,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 32,
               "Title": "Create.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Designation\\Create.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Designation\\Create.cshtml",
@@ -548,7 +659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 34,
               "Title": "UserCompanyApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\UserCompanyApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\UserCompanyApi.cs",
@@ -560,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 33,
               "Title": "_Form.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Designation\\_Form.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Designation\\_Form.cshtml",
@@ -572,7 +683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 35,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Department\\Index.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Department\\Index.cshtml",
@@ -584,7 +695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 36,
               "Title": "_Form.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Department\\_Form.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Department\\_Form.cshtml",
@@ -596,7 +707,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 37,
               "Title": "Create.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Department\\Create.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Department\\Create.cshtml",
@@ -608,7 +719,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 38,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Department\\Edit.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Department\\Edit.cshtml",
@@ -620,7 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 39,
               "Title": "IDepartmentApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\Interface\\IDepartmentApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\Interface\\IDepartmentApi.cs",
@@ -632,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 40,
               "Title": "CompanyController.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\CompanyController.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\CompanyController.cs",
@@ -645,7 +756,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 41,
               "Title": "ICompanyApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\Interface\\ICompanyApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\Interface\\ICompanyApi.cs",
@@ -657,7 +768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 42,
               "Title": "Select.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Company\\Select.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Company\\Select.cshtml",
@@ -669,7 +780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 43,
               "Title": "IUserCompanyApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\Interface\\IUserCompanyApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\Interface\\IUserCompanyApi.cs",
@@ -681,7 +792,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 45,
               "Title": "Create.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Company\\Create.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Company\\Create.cshtml",
@@ -693,7 +804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 44,
               "Title": "CompanyApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\CompanyApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\CompanyApi.cs",
@@ -705,7 +816,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 46,
               "Title": "CompanyCreateRequest.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\CompanyCreateRequest.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\CompanyCreateRequest.cs",
@@ -717,7 +828,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 47,
               "Title": "CompanyCreateViewModel.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\CompanyCreateViewModel.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\CompanyCreateViewModel.cs",
@@ -729,7 +840,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 49,
               "Title": "IAuthApi.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\Interface\\IAuthApi.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\Interface\\IAuthApi.cs",
@@ -741,7 +852,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 48,
               "Title": "CompanySelectionViewModel.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\CompanySelectionViewModel.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\CompanySelectionViewModel.cs",
@@ -753,7 +864,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 50,
               "Title": "ApiOptions.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Services\\ApiOptions.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Services\\ApiOptions.cs",
@@ -765,7 +876,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 51,
               "Title": "_LandingLayout.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Shared\\_LandingLayout.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Shared\\_LandingLayout.cshtml",
@@ -777,7 +888,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 54,
               "Title": "AuthDto.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\AuthDto.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\AuthDto.cs",
@@ -789,7 +900,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 53,
               "Title": "AccountViewModels.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Models\\AccountViewModels.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Models\\AccountViewModels.cs",
@@ -801,7 +912,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 52,
               "Title": "Register.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Account\\Register.cshtml",
@@ -813,7 +924,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 55,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Dashboard\\Index.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Dashboard\\Index.cshtml",
@@ -825,7 +936,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 57,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Controllers\\DashboardController.cs",
@@ -837,7 +948,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 58,
               "Title": "site.css",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "HaloAxis_UI\\wwwroot\\css\\site.css",
@@ -849,7 +960,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 56,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\Personal Projects\\Halo-Axis-UI\\HaloAxis_UI\\HaloAxis_UI\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "HaloAxis_UI\\Views\\Account\\Login.cshtml",

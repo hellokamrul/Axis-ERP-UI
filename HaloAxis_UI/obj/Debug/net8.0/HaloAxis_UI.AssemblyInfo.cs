@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HaloAxis_UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1684d4cc0ef152857a20d3f4fd88fe7a6b9042d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d65d39d97218a6419755aeabe0bf3bc05c6c97b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("HaloAxis_UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HaloAxis_UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
