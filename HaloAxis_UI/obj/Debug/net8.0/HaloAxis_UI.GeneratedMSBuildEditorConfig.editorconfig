@@ -76,6 +76,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduYXRpb25cX0Zvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Personal Projects/Halo-Axis-UI/HaloAxis_UI/HaloAxis_UI/Views/Employee/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Personal Projects/Halo-Axis-UI/HaloAxis_UI/HaloAxis_UI/Views/Employee/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Personal Projects/Halo-Axis-UI/HaloAxis_UI/HaloAxis_UI/Views/Holiday/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9saWRheVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

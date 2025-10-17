@@ -1,0 +1,65 @@
+﻿@model HaloAxis_UI.Models.Employee.EmployeeCreateDto
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";  // or _Layout
+    ViewData["Title"] = "Add Employee";
+}
+
+<a asp-action="Index" class="text-decoration-none d-inline-flex align-items-center mb-3">&larr; Back</a>
+<h3 class="mb-3">@ViewData["Title"]</h3>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label">First Name</label>
+            <input asp-for="FirstName" class="form-control" required />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Last Name</label>
+            <input asp-for="LastName" class="form-control" required />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Employee Type</label>
+            <select asp-for="EmployeeType" class="form-select">
+                <option>FULL_TIME</option>
+                <option>PART_TIME</option>
+                <option>CONTRACT</option>
+                <option>SEASONAL</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Mobile Number</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Department</label>
+            <input asp-for="Department" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Designation</label>
+            <input asp-for="Designation" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Join Date</label>
+            <input asp-for="JoinDate" type="date" class="form-control" />
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+        <a asp-action="Index" class="btn btn-light">Cancel</a>
+        <button class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -2,7 +2,12 @@
     Layout = null;
     var title = ViewData["Title"] as string ?? "HaloAxis";
     var ctrl = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "");
+
+    // existing module flags
     bool isHK = new[] { "Department", "Designation", "Shift", "Section" }.Contains(ctrl);
+
+    // NEW: HR module flag (add controllers that belong to HR module here)
+    bool isHR = new[] { "Employee" }.Contains(ctrl);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +20,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <!-- minimal helpers so module switching works even if site.css is empty -->
     <style>
         .app-grid {
             display: grid;
@@ -195,7 +199,6 @@
             background: #fff
         }
 
-        /* module switcher */
         .side-nav .module {
             display: none;
         }
@@ -203,8 +206,6 @@
             .side-nav .module.active {
                 display: block;
             }
-
-        /* responsive: collapse sidebar */
         @@media (max-width: 992px) {
             .app-grid
 
@@ -255,7 +256,13 @@
                 <a class="rail-btn js-open-module @(isHK ? "active" : null)" data-module="housekeeping" title="House Keeping">
                     <i class="bi bi-house-gear"></i>
                 </a>
-                <a class="rail-btn js-open-module @(!isHK ? "active" : null)" data-module="holiday" title="Holiday &amp; Leave">
+
+                <!-- NEW: HR opener -->
+                <a class="rail-btn js-open-module @(isHR ? "active" : null)" data-module="hr" title="HR">
+                    <i class="bi bi-people"></i>
+                </a>
+
+                <a class="rail-btn js-open-module @(!isHK && !isHR ? "active" : null)" data-module="holiday" title="Holiday &amp; Leave">
                     <i class="bi bi-umbrella"></i>
                 </a>
 
@@ -295,14 +302,25 @@
                 </ul>
             </div>
 
+            <!-- NEW: HR module -->
+            <div class="module @(isHR ? "active" : "")" data-module="hr">
+                <div class="side-title-wrap">
+                    <div class="side-title"><i class="bi bi-people"></i> HR</div>
+                </div>
+                <ul class="menu">
+                    <li><a class="menu-link @(ctrl=="Employee" ? "active" : null)" asp-controller="Employee" asp-action="Index">Employees</a></li>
+                    <!-- add more HR items later, e.g. Payroll, Attendance, etc. -->
+                </ul>
+            </div>
+
             <!-- Holiday & Leave module -->
-            <div class="module @(!isHK ? "active" : "")" data-module="holiday">
+            <div class="module @(!isHK && !isHR ? "active" : "")" data-module="holiday">
                 <div class="side-title-wrap">
                     <div class="side-title"><i class="bi bi-umbrella"></i> Holiday &amp; Leave</div>
                 </div>
                 <ul class="menu">
                     <li><a class="menu-link @(ctrl=="Holiday"       ? "active" : null)" asp-controller="Holiday" asp-action="Index">Holiday Management</a></li>
-                    <li><a class="menu-link @(ctrl=="LeaveType"     ? "active" : null)" asp-controller="LeaveManagement" asp-action="Index">Leave Type</a></li>
+                    <li><a class="menu-link @(ctrl=="LeaveManagement" ? "active" : null)" asp-controller="LeaveManagement" asp-action="Index">Leave Type</a></li>
                     <li><a class="menu-link @(ctrl=="LeaveBalance"  ? "active" : null)" asp-controller="LeaveBalance" asp-action="Index">Leave Balance</a></li>
                     <li class="menu-section">Leave Management</li>
                     <li><a class="menu-link @(ctrl=="LeaveRequest"  ? "active" : null)" asp-controller="LeaveRequest" asp-action="Index">Leave Request</a></li>
@@ -339,7 +357,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // ---------------- Sidebar collapse / expand ----------------
         const BODY = document.body;
         const KEY_SIDEBAR = 'haloaxis.sidebar.collapsed';
         const KEY_MODULE  = 'haloaxis.activeModule';
@@ -351,15 +368,13 @@
             BODY.classList.toggle('side-collapsed');
             try { localStorage.setItem(KEY_SIDEBAR, BODY.classList.contains('side-collapsed') ? '1' : '0'); } catch (e) {}
         };
-
         document.querySelectorAll('.js-toggle-sidebar').forEach(el => el.addEventListener('click', toggleSidebar));
 
-        // ---------------- Module switcher ----------------
         const showModule = (name) => {
             document.querySelectorAll('.side-nav .module').forEach(m => m.classList.toggle('active', m.dataset.module === name));
             document.querySelectorAll('.rail-nav .js-open-module').forEach(btn => btn.classList.toggle('active', btn.dataset.module === name));
-            BODY.classList.remove('side-collapsed'); // ensure visible on desktop
-            BODY.classList.add('side-open');         // slide-in on mobile
+            BODY.classList.remove('side-collapsed');
+            BODY.classList.add('side-open');
             try { localStorage.setItem(KEY_MODULE, name); } catch (e) {}
         };
 
@@ -367,11 +382,9 @@
             btn.addEventListener('click', (e) => { e.preventDefault(); showModule(btn.dataset.module); });
         });
 
-        // Mobile slide-in helpers
         document.getElementById('openSidebar')?.addEventListener('click', () => BODY.classList.toggle('side-open'));
         document.querySelector('.main')?.addEventListener('click', () => BODY.classList.remove('side-open'));
 
-        // Init: server-derived active block or remembered choice
         (function initModule(){
             const serverDefault = document.querySelector('.side-nav .module.active')?.dataset.module;
             let saved = null; try { saved = localStorage.getItem(KEY_MODULE); } catch(e){}
@@ -379,7 +392,6 @@
             showModule(initial);
         })();
 
-        // tooltips for rail icons
         if (window.bootstrap) {
             document.querySelectorAll('.rail-btn[title]').forEach(el => new bootstrap.Tooltip(el));
         }

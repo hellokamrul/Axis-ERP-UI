@@ -1,0 +1,207 @@
+﻿@model IEnumerable<HaloAxis_UI.Models.Employee.EmployeeListItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Employee List";
+
+    var total = (int)(ViewBag.TotalCount ?? 0);
+    var page = (int)(ViewBag.PageIndex ?? 1);
+    var size = (int)(ViewBag.PageSize ?? 10);
+    int last = Math.Max(1, (int)Math.Ceiling(total / (double)size));
+    string q = ViewBag.Query as string ?? "";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">Employee List</h3>
+
+    <div class="d-flex align-items-center gap-2">
+        <!-- Settings (columns + page size) -->
+        <div class="dropdown">
+            <button class="btn btn-light rounded-4 px-3 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-gear"></i>
+            </button>
+            <div class="dropdown-menu p-3" style="min-width:280px">
+                <div class="fw-bold fs-5 mb-2">Columns</div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="name" id="cName" checked />
+                    <label class="form-check-label" for="cName">Employee Name</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="designation" id="cDesignation" checked />
+                    <label class="form-check-label" for="cDesignation">Designation</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="department" id="cDepartment" checked />
+                    <label class="form-check-label" for="cDepartment">Department</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="type" id="cType" checked />
+                    <label class="form-check-label" for="cType">Employee Type</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="join" id="cJoin" checked />
+                    <label class="form-check-label" for="cJoin">Join Date</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="mobile" id="cMobile" checked />
+                    <label class="form-check-label" for="cMobile">Mobile Number</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input col-toggle" type="checkbox" value="status" id="cStatus" checked />
+                    <label class="form-check-label" for="cStatus">Status</label>
+                </div>
+
+                <div class="fw-bold fs-6 mt-3 mb-1">Rows per page</div>
+                <select id="rowsPerPage" class="form-select">
+                    <option value="10" selected="@(size==10)">10</option>
+                    <option value="25" selected="@(size==25)">25</option>
+                    <option value="50" selected="@(size==50)">50</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Export split button -->
+        <div class="btn-group">
+            <a href="@Url.Action("ExportCsv", "Employee", new { page = page, pageSize = size })" class="btn btn-light rounded-start-4 px-3 py-2" title="Export CSV">
+                <i class="bi bi-printer"></i>
+            </a>
+            <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split rounded-end-4 px-2 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" id="btnPrint">Print</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("ExportCsv", "Employee", new { page = page, pageSize = size })">Export CSV</a></li>
+            </ul>
+        </div>
+
+        <!-- Add Employee split button -->
+        <div class="btn-group">
+            <a asp-action="Create" class="btn btn-primary rounded-start-4">Add Employee</a>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split rounded-end-4" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Employee self onboard with form i-9</a></li>
+                <li><a class="dropdown-item" href="#">Employee self onboard</a></li>
+                <li><a class="dropdown-item" asp-action="Create">I’ll enter all their info myself</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Search -->
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+        <input class="form-control" name="q" value="@q" placeholder="Search here..." />
+        <input type="hidden" name="page" value="1" />
+        <input type="hidden" name="pageSize" value="@size" />
+        <button class="btn btn-outline-secondary">Search</button>
+    </div>
+</form>
+
+@if (TempData["ok"] is string msg)
+{
+    <div class="alert alert-success py-2">@msg</div>
+}
+
+<div class="table-responsive">
+    <table class="table align-middle" id="grid">
+        <thead>
+            <tr>
+                <th style="width:48px"><input type="checkbox" /></th>
+                <th data-col="name">Employee Name</th>
+                <th data-col="designation">Designation</th>
+                <th data-col="department">Department</th>
+                <th data-col="type">Employee Type</th>
+                <th data-col="join">Join Date</th>
+                <th data-col="mobile">Mobile Number</th>
+                <th data-col="status">Status</th>
+                <th style="width:70px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td data-col="name">@e.EmployeeName</td>
+                    <td data-col="designation">@e.Designation</td>
+                    <td data-col="department">@e.Department</td>
+                    <td data-col="type">@e.EmployeeType</td>
+                    <td data-col="join">@e.JoinDate?.ToString("yyyy-MM-dd")</td>
+                    <td data-col="mobile">@e.MobileNumber</td>
+                    <td data-col="status"><span class="badge bg-success">@e.Status</span></td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-secondary" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Pager -->
+@if (total > 0)
+{
+    <div class="d-flex justify-content-between align-items-center mt-2">
+        <div>Showing @(((page - 1) * size) + 1) - @(Math.Min(page * size, total)) from @total</div>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item @(page==1?"disabled":"")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(page-1)" asp-route-pageSize="@size" asp-route-q="@q">«</a>
+                </li>
+                @for (int p = 1; p <= Math.Max(1, (int)Math.Ceiling(total / (double)size)); p++)
+                {
+                    <li class="page-item @(page==p?"active":"")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@p" asp-route-pageSize="@size" asp-route-q="@q">@p</a>
+                    </li>
+                }
+                <li class="page-item @(page*size>=total?"disabled":"")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(page+1)" asp-route-pageSize="@size" asp-route-q="@q">»</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // Column toggles
+        document.querySelectorAll('.col-toggle').forEach(cb => {
+            cb.addEventListener('change', () => {
+                const col = cb.value;
+                document.querySelectorAll(`[data-col="${col}"]`).forEach(td => {
+                    td.closest('tr').querySelectorAll(`[data-col="${col}"]`);
+                });
+                toggleCol(col, cb.checked);
+            });
+            // init
+            toggleCol(cb.value, cb.checked);
+        });
+
+        function toggleCol(col, show) {
+            const sel = `[data-col="${col}"]`;
+            document.querySelectorAll(sel).forEach(el => {
+                el.style.display = show ? '' : 'none';
+            });
+            // Also hide the header
+            const th = document.querySelector('th' + sel.replace('data-col', '[data-col]'));
+            if (th) th.style.display = show ? '' : 'none';
+        }
+
+        // Rows per page -> navigate
+        document.getElementById('rowsPerPage')?.addEventListener('change', (e) => {
+            const size = e.target.value;
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', '1');
+            url.searchParams.set('pageSize', size);
+            window.location.href = url.toString();
+        });
+
+        // Print current table
+        document.getElementById('btnPrint')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.print();
+        });
+    </script>
+}
